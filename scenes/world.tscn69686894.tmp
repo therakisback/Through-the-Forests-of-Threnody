@@ -1,0 +1,191 @@
+[gd_scene format=4 uid="uid://cgdn255ltit1k"]
+
+[ext_resource type="Script" uid="uid://22qtqtihyu6j" path="res://scripts/terrain_gen.gd" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://del6bqv0hpyk1" path="res://scripts/enemy_spawning.gd" id="2_lakw3"]
+[ext_resource type="PackedScene" uid="uid://cprx6meri66jh" path="res://scenes/player.tscn" id="2_rwgxs"]
+[ext_resource type="Script" uid="uid://deo0gxkmk2ahd" path="res://addons/sky_3d/src/Sky3D.gd" id="3_4wyf3"]
+[ext_resource type="Script" uid="uid://b4tkplvh7fq40" path="res://addons/sky_3d/src/SkyDome.gd" id="4_71j4m"]
+[ext_resource type="Script" uid="uid://cjmkcj8hwm7ts" path="res://addons/sky_3d/src/TimeOfDay.gd" id="5_qfnet"]
+[ext_resource type="Script" uid="uid://wrqel3132hbv" path="res://addons/proton_scatter/src/scatter.gd" id="6_dss4m"]
+[ext_resource type="FastNoiseLite" uid="uid://usmddvucnba6" path="res://terrain_noise.tres" id="6_i7141"]
+[ext_resource type="Script" uid="uid://745yl4uuf6hx" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="7_7t5mc"]
+[ext_resource type="Script" uid="uid://8acsbtxwoqfe" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="8_lakw3"]
+[ext_resource type="Script" uid="uid://naj3afmrxmhe" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="9_pm21f"]
+[ext_resource type="Script" uid="uid://bt5do50q3sb1i" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="10_2lf6f"]
+[ext_resource type="Script" uid="uid://ci5ras2buwccn" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="11_7iits"]
+[ext_resource type="Script" uid="uid://bl7ukypk7347q" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="12_oo54l"]
+[ext_resource type="Script" uid="uid://bphfcmdctiq0c" path="res://addons/proton_scatter/src/modifiers/offset_position.gd" id="13_7t5mc"]
+[ext_resource type="Script" uid="uid://bxuv37fua3ywt" path="res://addons/proton_scatter/src/scatter_item.gd" id="13_kpybi"]
+[ext_resource type="Script" uid="uid://cxpye6b88m5pi" path="res://addons/proton_scatter/src/scatter_shape.gd" id="14_ctatt"]
+[ext_resource type="Script" uid="uid://bmfbe715km8ok" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="15_xgqkh"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7t5mc"]
+size = Vector2(128, 512)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7t5mc"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lakw3"]
+_surfaces = [{
+"aabb": AABB(-63.999996, -12.344382, -255.99998, 128, 18.871086, 512),
+"attribute_data": PackedByteArray("AACAPwAAgD/NzEw/AACAPwAAgD/NzEw/zcxMP83MTD+amRk/AACAP5qZGT/NzEw/zMzMPgAAgD/MzMw+zcxMP8zMTD4AAIA/zMxMPs3MTD8AAAAAAACAPwAAAADNzEw/AACAP5qZGT/NzEw/mpkZP5qZGT+amRk/zMzMPpqZGT/MzEw+mpkZPwAAAACamRk/AACAP8zMzD7NzEw/zMzMPpqZGT/MzMw+zMzMPszMzD7MzEw+zMzMPgAAAADMzMw+AACAP8zMTD7NzEw/zMxMPpqZGT/MzEw+zMzMPszMTD7MzEw+zMxMPgAAAADMzEw+AACAPwAAAADNzEw/AAAAAJqZGT8AAAAAzMzMPgAAAADMzEw+AAAAAAAAAAAAAAAA"),
+"format": 34359742487,
+"index_count": 150,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAQAEAAMABAAFAAMABAAGAAUABgAHAAUABgAIAAcACAAJAAcACAAKAAkACgALAAkAAgADAAwAAwANAAwAAwAFAA0ABQAOAA0ABQAHAA4ABwAPAA4ABwAJAA8ACQAQAA8ACQALABAACwARABAADAANABIADQATABIADQAOABMADgAUABMADgAPABQADwAVABQADwAQABUAEAAWABUAEAARABYAEQAXABYAEgATABgAEwAZABgAEwAUABkAFAAaABkAFAAVABoAFQAbABoAFQAWABsAFgAcABsAFgAXABwAFwAdABwAGAAZAB4AGQAfAB4AGQAaAB8AGgAgAB8AGgAbACAAGwAhACAAGwAcACEAHAAiACEAHAAdACIAHQAjACIA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AACAQj4obUAAAIBDmpkZQt48AD8AAIBDAACAQjpBT0CamRlDmpkZQoROy0CamRlDzsxMQfeqeD8AAIBDzsxMQSbKqUCamRlDzMxMwe9Ho0AAAIBDzMxMwbKZrECamRlDmZkZwlmYmkAAAIBDmZkZwpeCSMCamRlD//9/wrEMyEAAAIBD//9/wpeCRcGamRlDAACAQrKPjj/OzExCmpkZQsDa0EDOzExCzsxMQXG/9D/OzExCzMxMwVNpkEDOzExCmZkZwkCN7r/OzExC//9/whfKvb7OzExCAACAQoocJ0DMzEzCmpkZQoDxYD/MzEzCzsxMQSZVOUDMzEzCzMxMwSrwFMHMzEzCmZkZwrSAuMDMzEzC//9/wlBhI8DMzEzCAACAQlQqnECZmRnDmpkZQsAxYcCZmRnDzsxMQdi1AMGZmRnDzMxMwW4CtcCZmRnDmZkZwpopvcCZmRnD//9/wgvLqsCZmRnDAACAQqksj8D//3/DmpkZQvzjjMD//3/DzsxMQbkecsD//3/DzMxMwSTcl0D//3/DmZkZwgijokD//3/D//9/wimgZUD//3/DTHHQ8f///7+agOP6////v8yE5/n///+/mYeo9f///79dhRf1////vwp+j/3///+/Gob79////78/c4z1////vwxwsfX///+/emGl5v///7+SZG7x////vyNon+n///+/x5Ni7P///79cfPf+////vz98h/7///+/7Ghl7f///7+Bc870////v2OJY/T///+/x4P9/P///7+6c9/2////vztrp/H///+/Tmw78v///79UjOn0////v2+Me/X///+/a2QQ6P///7+Jatfv////vxZz3vT///+/i4ux7v///788gxb3////v3V/vfj///+/DGo67////78Hegn5////v5CP+en///+/cIue6f///78ef37z////v3l5u+////+/")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4mrxx"]
+albedo_color = Color(0.28435934, 0.44193697, 0.28471005, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pm21f"]
+data = PackedVector3Array(64, 3.7056, 256, 38.399998, 0.5009, 256, 64, 3.2384, 153.59999, 38.399998, 0.5009, 256, 38.399998, 6.3532996, 153.59999, 64, 3.2384, 153.59999, 38.399998, 0.5009, 256, 12.799999, 0.97139996, 256, 38.399998, 6.3532996, 153.59999, 12.799999, 0.97139996, 256, 12.799999, 5.3059, 153.59999, 38.399998, 6.3532996, 153.59999, 12.799999, 0.97139996, 256, -12.799999, 5.1025, 256, 12.799999, 5.3059, 153.59999, -12.799999, 5.1025, 256, -12.799999, 5.3938, 153.59999, 12.799999, 5.3059, 153.59999, -12.799999, 5.1025, 256, -38.399998, 4.8311, 256, -12.799999, 5.3938, 153.59999, -38.399998, 4.8311, 256, -38.399998, -3.133, 153.59999, -12.799999, 5.3938, 153.59999, -38.399998, 4.8311, 256, -64, 6.2514997, 256, -38.399998, -3.133, 153.59999, -64, 6.2514997, 256, -64, -12.344399, 153.59999, -38.399998, -3.133, 153.59999, 64, 3.2384, 153.59999, 38.399998, 6.3532996, 153.59999, 64, 1.1137999, 51.199997, 38.399998, 6.3532996, 153.59999, 38.399998, 6.5267, 51.199997, 64, 1.1137999, 51.199997, 38.399998, 6.3532996, 153.59999, 12.799999, 5.3059, 153.59999, 38.399998, 6.5267, 51.199997, 12.799999, 5.3059, 153.59999, 12.799999, 1.9121, 51.199997, 38.399998, 6.5267, 51.199997, 12.799999, 5.3059, 153.59999, -12.799999, 5.3938, 153.59999, 12.799999, 1.9121, 51.199997, -12.799999, 5.3938, 153.59999, -12.799999, 4.5129, 51.199997, 12.799999, 1.9121, 51.199997, -12.799999, 5.3938, 153.59999, -38.399998, -3.133, 153.59999, -12.799999, 4.5129, 51.199997, -38.399998, -3.133, 153.59999, -38.399998, -1.8636999, 51.199997, -12.799999, 4.5129, 51.199997, -38.399998, -3.133, 153.59999, -64, -12.344399, 153.59999, -38.399998, -1.8636999, 51.199997, -64, -12.344399, 153.59999, -64, -0.3707, 51.199997, -38.399998, -1.8636999, 51.199997, 64, 1.1137999, 51.199997, 38.399998, 6.5267, 51.199997, 64, 2.6111, -51.199997, 38.399998, 6.5267, 51.199997, 38.399998, 0.87869996, -51.199997, 64, 2.6111, -51.199997, 38.399998, 6.5267, 51.199997, 12.799999, 1.9121, 51.199997, 38.399998, 0.87869996, -51.199997, 12.799999, 1.9121, 51.199997, 12.799999, 2.8957999, -51.199997, 38.399998, 0.87869996, -51.199997, 12.799999, 1.9121, 51.199997, -12.799999, 4.5129, 51.199997, 12.799999, 2.8957999, -51.199997, -12.799999, 4.5129, 51.199997, -12.799999, -9.308599, -51.199997, 12.799999, 2.8957999, -51.199997, -12.799999, 4.5129, 51.199997, -38.399998, -1.8636999, 51.199997, -12.799999, -9.308599, -51.199997, -38.399998, -1.8636999, 51.199997, -38.399998, -5.7657, -51.199997, -12.799999, -9.308599, -51.199997, -38.399998, -1.8636999, 51.199997, -64, -0.3707, 51.199997, -38.399998, -5.7657, -51.199997, -64, -0.3707, 51.199997, -64, -2.5528, -51.199997, -38.399998, -5.7657, -51.199997, 64, 2.6111, -51.199997, 38.399998, 0.87869996, -51.199997, 64, 4.8802, -153.59999, 38.399998, 0.87869996, -51.199997, 38.399998, -3.5187, -153.59999, 64, 4.8802, -153.59999, 38.399998, 0.87869996, -51.199997, 12.799999, 2.8957999, -51.199997, 38.399998, -3.5187, -153.59999, 12.799999, 2.8957999, -51.199997, 12.799999, -8.0444, -153.59999, 38.399998, -3.5187, -153.59999, 12.799999, 2.8957999, -51.199997, -12.799999, -9.308599, -51.199997, 12.799999, -8.0444, -153.59999, -12.799999, -9.308599, -51.199997, -12.799999, -5.6565, -153.59999, 12.799999, -8.0444, -153.59999, -12.799999, -9.308599, -51.199997, -38.399998, -5.7657, -51.199997, -12.799999, -5.6565, -153.59999, -38.399998, -5.7657, -51.199997, -38.399998, -5.9112997, -153.59999, -12.799999, -5.6565, -153.59999, -38.399998, -5.7657, -51.199997, -64, -2.5528, -51.199997, -38.399998, -5.9112997, -153.59999, -64, -2.5528, -51.199997, -64, -5.3373, -153.59999, -38.399998, -5.9112997, -153.59999, 64, 4.8802, -153.59999, 38.399998, -3.5187, -153.59999, 64, -4.4742, -256, 38.399998, -3.5187, -153.59999, 38.399998, -4.4028, -256, 64, -4.4742, -256, 38.399998, -3.5187, -153.59999, 12.799999, -8.0444, -153.59999, 38.399998, -4.4028, -256, 12.799999, -8.0444, -153.59999, 12.799999, -3.7831, -256, 38.399998, -4.4028, -256, 12.799999, -8.0444, -153.59999, -12.799999, -5.6565, -153.59999, 12.799999, -3.7831, -256, -12.799999, -5.6565, -153.59999, -12.799999, 4.7455997, -256, 12.799999, -3.7831, -256, -12.799999, -5.6565, -153.59999, -38.399998, -5.9112997, -153.59999, -12.799999, 4.7455997, -256, -38.399998, -5.9112997, -153.59999, -38.399998, 5.0824, -256, -12.799999, 4.7455997, -256, -38.399998, -5.9112997, -153.59999, -64, -5.3373, -153.59999, -38.399998, 5.0824, -256, -64, -5.3373, -153.59999, -64, 3.5879, -256, -38.399998, 5.0824, -256)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k0juu"]
+
+[sub_resource type="Sky" id="Sky_71j4m"]
+sky_material = SubResource("ShaderMaterial_k0juu")
+
+[sub_resource type="Environment" id="Environment_qfnet"]
+background_mode = 2
+sky = SubResource("Sky_71j4m")
+ambient_light_source = 3
+ambient_light_color = Color(0.67082644, 0.5324896, 0.46344954, 1)
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_white = 6.0
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.08553026, 0.09718645, 0.11532409, 1)
+fog_density = 1.0
+fog_depth_curve = 11.712682
+fog_depth_begin = 1.0
+fog_depth_end = 75.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_i7141"]
+
+[sub_resource type="Resource" id="Resource_2lf6f"]
+script = ExtResource("9_pm21f")
+amount = 300
+restrict_height = true
+reference_frame = 1
+
+[sub_resource type="Resource" id="Resource_7iits"]
+script = ExtResource("10_2lf6f")
+position = Vector3(0.15, 0.15, 0.15)
+rotation = Vector3(5, 360, 5)
+scale = Vector3(1, 1, 1)
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_oo54l"]
+script = ExtResource("11_7iits")
+iterations = 4
+offset_step = 10.0
+consecutive_step_multiplier = 0.75
+restrict_height = true
+
+[sub_resource type="Resource" id="Resource_kpybi"]
+script = ExtResource("12_oo54l")
+ray_offset = 5.0
+
+[sub_resource type="Resource" id="Resource_ctatt"]
+script = ExtResource("13_7t5mc")
+position = Vector3(0, 5, 0)
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_xgqkh"]
+script = ExtResource("7_7t5mc")
+stack = Array[ExtResource("8_lakw3")]([SubResource("Resource_2lf6f"), SubResource("Resource_7iits"), SubResource("Resource_oo54l"), SubResource("Resource_kpybi"), SubResource("Resource_ctatt")])
+
+[sub_resource type="Resource" id="Resource_rup4s"]
+script = ExtResource("15_xgqkh")
+size = Vector3(128, 10, 512)
+metadata/_custom_type_script = "uid://bmfbe715km8ok"
+
+[node name="World" type="Node3D" unique_id=877487672]
+
+[node name="Player" parent="." unique_id=1238964501 instance=ExtResource("2_rwgxs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3220725, -240.88867)
+strafe_speed = 5.0
+speed = 10.0
+
+[node name="Enemies" type="MeshInstance3D" parent="." unique_id=1116494911]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 0)
+mesh = SubResource("PlaneMesh_7t5mc")
+surface_material_override/0 = SubResource("StandardMaterial3D_7t5mc")
+script = ExtResource("2_lakw3")
+max_enemies = 50
+
+[node name="Environment" type="Node3D" parent="." unique_id=1587494943]
+
+[node name="Terrain" type="StaticBody3D" parent="Environment" unique_id=613910776]
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("1_nnsk1")
+width = 128.0
+length = 512.0
+resolution = 4
+noise = ExtResource("6_i7141")
+height = 28.0
+
+[node name="TerrainMesh" type="MeshInstance3D" parent="Environment/Terrain" unique_id=694455779]
+mesh = SubResource("ArrayMesh_lakw3")
+surface_material_override/0 = SubResource("StandardMaterial3D_4mrxx")
+
+[node name="TerrainCollision" type="CollisionShape3D" parent="Environment/Terrain" unique_id=1421492211]
+shape = SubResource("ConcavePolygonShape3D_pm21f")
+
+[node name="Sky3D" type="WorldEnvironment" parent="Environment" unique_id=145397880]
+environment = SubResource("Environment_qfnet")
+camera_attributes = SubResource("CameraAttributesPractical_i7141")
+script = ExtResource("3_4wyf3")
+editor_time_enabled = false
+current_time = 7.57
+wind_direction = 2.35619451204804
+
+[node name="SunLight" type="DirectionalLight3D" parent="Environment/Sky3D" unique_id=985551437]
+transform = Transform3D(0.5044996, -0.23791657, 0.82998544, 0, 0.9612856, 0.27555397, -0.8634119, -0.13901687, 0.48496822, 0.82998544, 0.27555397, 0.48496822)
+light_color = Color(0.99102217, 0.7858785, 0.6830822, 1)
+shadow_enabled = true
+
+[node name="MoonLight" type="DirectionalLight3D" parent="Environment/Sky3D" unique_id=263540370]
+transform = Transform3D(0, -0.44781575, 0.8941259, 0.99993545, 0.010161563, 0.0050893365, -0.011364801, 0.8940682, 0.4477868, 0.8941259, 0.0050893365, 0.4477868)
+light_color = Color(0.572549, 0.776471, 0.956863, 1)
+light_energy = 0.0
+
+[node name="SkyDome" type="Node" parent="Environment/Sky3D" unique_id=1987928818]
+script = ExtResource("4_71j4m")
+sun_azimuth = -2.0995986
+sun_altitude = -1.2916304
+moon_azimuth = -2.0350914
+moon_altitude = -1.565707
+wind_direction = 2.35619451204804
+
+[node name="TimeOfDay" type="Node" parent="Environment/Sky3D" unique_id=33959659]
+script = ExtResource("5_qfnet")
+editor_time_enabled = false
+dome_path = NodePath("../SkyDome")
+current_time = 7.57
+
+[node name="ProtonScatter" type="Node3D" parent="Environment" unique_id=1754042926]
+visible = false
+script = ExtResource("6_dss4m")
+render_mode = 1
+keep_static_colliders = true
+modifier_stack = SubResource("Resource_xgqkh")
+Performance/use_chunks = true
+Performance/chunk_dimensions = Vector3(15, 15, 15)
+metadata/_custom_type_script = "uid://wrqel3132hbv"
+
+[node name="Trees" type="Node3D" parent="Environment/ProtonScatter" unique_id=1972926436]
+script = ExtResource("13_kpybi")
+path = "uid://1qgn8bnadfn8"
+
+[node name="ScatterShape" type="Node3D" parent="Environment/ProtonScatter" unique_id=2130410925]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
+script = ExtResource("14_ctatt")
+shape = SubResource("Resource_rup4s")

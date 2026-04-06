@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://e6dl23t1gf1d"
+path="res://.godot/imported/birchnak_0.obj-660986c5c4d3ae63a827b3de653cb40e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/birchnak_0.obj-660986c5c4d3ae63a827b3de653cb40e.mesh"]
+
+source_file="res://assets/Retro PSX Style Wilderness Assets/Meshes/trees/birchnak_0.obj"
+dest_files=["res://.godot/imported/birchnak_0.obj-660986c5c4d3ae63a827b3de653cb40e.mesh", "res://.godot/imported/birchnak_0.obj-660986c5c4d3ae63a827b3de653cb40e.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

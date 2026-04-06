@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bwcctx4yywf3v"
+path="res://.godot/imported/poplar_1.obj-c54603cf16469e35ed41da3d63e76bbd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/poplar_1.obj-c54603cf16469e35ed41da3d63e76bbd.mesh"]
+
+source_file="res://assets/Retro PSX Style Wilderness Assets/Meshes/trees/poplar_1.obj"
+dest_files=["res://.godot/imported/poplar_1.obj-c54603cf16469e35ed41da3d63e76bbd.mesh", "res://.godot/imported/poplar_1.obj-c54603cf16469e35ed41da3d63e76bbd.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

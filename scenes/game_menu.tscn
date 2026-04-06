@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cb5ned4rsirv4"]
+
+[node name="Game Menu" type="CanvasLayer" unique_id=882220174]
+
+[node name="Menu" type="Control" parent="." unique_id=1016669956]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

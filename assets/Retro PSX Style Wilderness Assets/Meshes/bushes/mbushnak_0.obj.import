@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cq1yl475e6x85"
+path="res://.godot/imported/mbushnak_0.obj-6f7caa644e1d507166e9848c8eebd1fa.mesh"
+
+[deps]
+
+files=["res://.godot/imported/mbushnak_0.obj-6f7caa644e1d507166e9848c8eebd1fa.mesh"]
+
+source_file="res://assets/Retro PSX Style Wilderness Assets/Meshes/bushes/mbushnak_0.obj"
+dest_files=["res://.godot/imported/mbushnak_0.obj-6f7caa644e1d507166e9848c8eebd1fa.mesh", "res://.godot/imported/mbushnak_0.obj-6f7caa644e1d507166e9848c8eebd1fa.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
