@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c31hw6dsu2eer"
+path="res://.godot/imported/46 Clover Dancers.mp3-8b11969ef12c738f44bace12076bd7a8.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/46 Clover Dancers.mp3"
+dest_files=["res://.godot/imported/46 Clover Dancers.mp3-8b11969ef12c738f44bace12076bd7a8.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

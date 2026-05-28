@@ -1,27 +1,60 @@
 [gd_scene format=3 uid="uid://cprx6meri66jh"]
 
 [ext_resource type="Script" uid="uid://7wfuk7t0cs2y" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="AudioStream" uid="uid://f8hjsnwmuj4t" path="res://assets/audio/mixkit-fast-sword-whoosh-2792.wav" id="2_g2els"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
+radius = 0.2
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_3vyb7"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3vyb7"]
+radius = 0.35
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3vyb7"]
+height = 0.5
+radius = 1.5
 
 [node name="Player" type="CharacterBody3D" unique_id=1422335552]
-collision_mask = 14
+collision_mask = 12
+wall_min_slide_angle = 0.0
 script = ExtResource("1_3vyb7")
+strafe_speed = null
+speed = null
+load_wait_time = null
+death_wait_time = null
+magnesium_lifetime = null
+attack_range = null
+aluminum_piece_modifier = null
+primary_delay = null
+godmode = null
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=748826320]
+[node name="PhysicsCollider" type="CollisionShape3D" parent="." unique_id=748826320]
 shape = SubResource("CapsuleShape3D_u8vuu")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=825485378]
-mesh = SubResource("CapsuleMesh_3vyb7")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=105526522]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.5, 0)
-fov = 90.0
+fov = 100.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=862076512]
 light_color = Color(1, 0.71333337, 0.13999999, 1)
 light_energy = 2.0
+shadow_enabled = true
 omni_range = 30.0
 omni_attenuation = 0.755
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1649935529]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1781153100]
+shape = SubResource("CapsuleShape3D_3vyb7")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="Area3D" unique_id=491482375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+shape = SubResource("CylinderShape3D_3vyb7")
+target_position = Vector3(0, 0, 0)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2106914783]
+stream = ExtResource("2_g2els")
+volume_db = -10.0
+
+[connection signal="area_entered" from="Area3D" to="." method="_die"]

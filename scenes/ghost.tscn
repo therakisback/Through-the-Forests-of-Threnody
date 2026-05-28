@@ -1,13 +1,10 @@
 [gd_scene format=3 uid="uid://c6x8ypymqe7o4"]
 
 [ext_resource type="Script" uid="uid://8vnh072ok545" path="res://scripts/ghost.gd" id="1_t76o2"]
+[ext_resource type="PackedScene" uid="uid://bnllryk2h5ef4" path="res://scenes/Shade.glb" id="2_5mfnq"]
 [ext_resource type="Material" uid="uid://bmc486op4a85r" path="res://assets/gray_eyes.tres" id="3_bbnym"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_k5nrt"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t76o2"]
-transparency = 1
-albedo_color = Color(0.39215687, 0.39215687, 0.39215687, 0.6431373)
+[ext_resource type="Material" uid="uid://b5q5rbu7wqcu7" path="res://assets/essence.tres" id="3_lv6vd"]
+[ext_resource type="AudioStream" uid="uid://d05hmpe3rex10" path="res://assets/audio/freesound_community-ghost-whispers-6030.mp3" id="3_veat2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t76o2"]
 
@@ -19,27 +16,46 @@ height = 0.1
 radius = 0.05
 height = 0.1
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l5lq6"]
+height = 2.5
+
 [node name="Ghost" type="CharacterBody3D" unique_id=482712621]
 collision_layer = 2
-collision_mask = 13
+collision_mask = 4
 up_direction = Vector3(-0.0004382121, 0.99999994, 0)
 script = ExtResource("1_t76o2")
 enemy_speed = 2.5
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1819889603]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-mesh = SubResource("CapsuleMesh_k5nrt")
-surface_material_override/0 = SubResource("StandardMaterial3D_t76o2")
+[node name="Shade" parent="." unique_id=140924169 instance=ExtResource("2_5mfnq")]
+transform = Transform3D(-5.2453668e-08, 0, 1.2, 0, 1.2, 0, -1.2, 0, -5.2453668e-08, 0, -0.84418845, 0)
+
+[node name="Dress" parent="Shade" index="0" unique_id=1784809303]
+surface_material_override/0 = ExtResource("3_lv6vd")
+
+[node name="Body" parent="Shade/Armature/Skeleton3D" parent_id_path=PackedInt32Array(140924169, 1138796174) index="0" unique_id=911075337]
+surface_material_override/0 = ExtResource("3_lv6vd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=390099664]
 shape = SubResource("CapsuleShape3D_t76o2")
 
 [node name="Right Eye" type="MeshInstance3D" parent="." unique_id=314760628]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 1, -0.421)
+transform = Transform3D(0.7336107, 0, 0.10395585, 0, 0.5, 0, -0.15593377, 0, 0.4890738, -0.05, 1.05, -0.43416256)
 mesh = SubResource("SphereMesh_t76o2")
 surface_material_override/0 = ExtResource("3_bbnym")
 
 [node name="Left Eye" type="MeshInstance3D" parent="." unique_id=1044824126]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 1, -0.42095995)
+transform = Transform3D(0.73361075, 0, -0.10395585, 0, 0.5, 0, 0.15593377, 0, 0.4890738, 0.05, 1.05, -0.434)
 mesh = SubResource("SphereMesh_bbnym")
 surface_material_override/0 = ExtResource("3_bbnym")
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=459935034]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=2036923799]
+shape = SubResource("CapsuleShape3D_l5lq6")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1998522737]
+stream = ExtResource("3_veat2")
+volume_db = 10.0
+max_distance = 5.0
+
+[editable path="Shade"]

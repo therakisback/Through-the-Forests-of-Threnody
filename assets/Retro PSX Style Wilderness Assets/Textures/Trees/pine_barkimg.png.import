@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cbrh6kcci8bkg"
 path.s3tc="res://.godot/imported/pine_barkimg.png-a5d85bcc896ad2df2d43f7984d18f8b6.s3tc.ctex"
+path.etc2="res://.godot/imported/pine_barkimg.png-a5d85bcc896ad2df2d43f7984d18f8b6.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/Retro PSX Style Wilderness Assets/Textures/Trees/pine_barkimg.png"
-dest_files=["res://.godot/imported/pine_barkimg.png-a5d85bcc896ad2df2d43f7984d18f8b6.s3tc.ctex"]
+dest_files=["res://.godot/imported/pine_barkimg.png-a5d85bcc896ad2df2d43f7984d18f8b6.s3tc.ctex", "res://.godot/imported/pine_barkimg.png-a5d85bcc896ad2df2d43f7984d18f8b6.etc2.ctex"]
 
 [params]
 

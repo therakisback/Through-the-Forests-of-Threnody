@@ -1,0 +1,738 @@
+[gd_scene format=4 uid="uid://bv5shsg3o5uav"]
+
+[ext_resource type="Script" uid="uid://coactkbpuukky" path="res://scripts/main_menu.gd" id="1_jk1qb"]
+[ext_resource type="Script" uid="uid://22qtqtihyu6j" path="res://scripts/terrain_gen.gd" id="2_dj67d"]
+[ext_resource type="Texture2D" uid="uid://bo2g1gwi31fj2" path="res://assets/Retro PSX Style Wilderness Assets/Textures/Terrain/grassimg.png" id="3_6vcge"]
+[ext_resource type="Script" uid="uid://wrqel3132hbv" path="res://addons/proton_scatter/src/scatter.gd" id="4_ip0br"]
+[ext_resource type="Script" uid="uid://745yl4uuf6hx" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="5_xyero"]
+[ext_resource type="Script" uid="uid://c80rmbdmhie2x" path="res://scripts/jobs_board.gd" id="6_lgwnu"]
+[ext_resource type="Script" uid="uid://c7b3ksgc4732k" path="res://scripts/money_counter.gd" id="6_tbmy8"]
+[ext_resource type="Script" uid="uid://8acsbtxwoqfe" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="6_tcusk"]
+[ext_resource type="Script" uid="uid://naj3afmrxmhe" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="7_4puye"]
+[ext_resource type="Script" uid="uid://bt5do50q3sb1i" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="8_q13xq"]
+[ext_resource type="Script" uid="uid://ci5ras2buwccn" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="9_u43bj"]
+[ext_resource type="Script" uid="uid://bl7ukypk7347q" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="10_jvjdd"]
+[ext_resource type="Script" uid="uid://drhxycqi44648" path="res://addons/proton_scatter/src/modifiers/offset_scale.gd" id="11_yxnar"]
+[ext_resource type="Script" uid="uid://bxuv37fua3ywt" path="res://addons/proton_scatter/src/scatter_item.gd" id="12_eku7s"]
+[ext_resource type="Theme" uid="uid://dtxdvdh81ssq3" path="res://assets/themes/threnodite_theme.tres" id="13_3wgol"]
+[ext_resource type="Script" uid="uid://cxpye6b88m5pi" path="res://addons/proton_scatter/src/scatter_shape.gd" id="13_c6nra"]
+[ext_resource type="Script" uid="uid://bmfbe715km8ok" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="14_qw82i"]
+[ext_resource type="PackedScene" uid="uid://c6x8ypymqe7o4" path="res://scenes/ghost.tscn" id="15_1468l"]
+[ext_resource type="Shader" uid="uid://cvd0x7lon1ur6" path="res://addons/sky_3d/shaders/SkyMaterial.gdshader" id="16_01xyg"]
+[ext_resource type="Texture2D" uid="uid://cfqk60lpl5ljv" path="res://addons/sky_3d/assets/resources/SNoise.tres" id="17_764ux"]
+[ext_resource type="Texture2D" uid="uid://cecwdqjol0ckd" path="res://addons/sky_3d/assets/textures/noiseClouds.png" id="18_wadof"]
+[ext_resource type="Texture2D" uid="uid://2r8ylu6rg5dp" path="res://addons/sky_3d/assets/thirdparty/textures/moon/MoonMap.png" id="19_b4jiv"]
+[ext_resource type="Texture2D" uid="uid://djpfuyxkryegn" path="res://addons/sky_3d/assets/textures/noise.jpg" id="20_68b7m"]
+[ext_resource type="Texture2D" uid="uid://bm7dot7t7u1q4" path="res://addons/sky_3d/assets/thirdparty/textures/milkyway/StarField.jpg" id="21_vanrq"]
+[ext_resource type="Texture2D" uid="uid://c1vwcdcdvb74a" path="res://addons/sky_3d/assets/thirdparty/textures/milkyway/Milkyway.jpg" id="22_ybca7"]
+[ext_resource type="Script" uid="uid://deo0gxkmk2ahd" path="res://addons/sky_3d/src/Sky3D.gd" id="23_k5xsf"]
+[ext_resource type="Script" uid="uid://b4tkplvh7fq40" path="res://addons/sky_3d/src/SkyDome.gd" id="24_71lbq"]
+[ext_resource type="Script" uid="uid://cjmkcj8hwm7ts" path="res://addons/sky_3d/src/TimeOfDay.gd" id="25_akqfu"]
+[ext_resource type="Script" uid="uid://cuim6wbrflwmq" path="res://scripts/quit_button.gd" id="26_1acrt"]
+[ext_resource type="PackedScene" uid="uid://bm8o11d0fugil" path="res://scenes/loading_screen.tscn" id="28_1a85y"]
+[ext_resource type="Script" uid="uid://cu3hwrtuimqi5" path="res://scripts/shop.gd" id="30_6h3lr"]
+[ext_resource type="AudioStream" uid="uid://bxowchhf48d1p" path="res://assets/audio/02 - Dirtmouth.mp3" id="32_dj67d"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_flqon"]
+offset = Vector3(0, -2.46, 0)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6vcge"]
+_surfaces = [{
+"aabb": AABB(-40, -9.17085, -31.999998, 80, 15.428961, 64),
+"attribute_data": PackedByteArray("AACAPwAAgD9VVVU/AACAPwAAgD/NzEw/VVVVP83MTD+qqio/AACAP6qqKj/NzEw/AAAAPwAAgD8AAAA/zcxMP6qqqj4AAIA/qqqqPs3MTD+sqio+AACAP6yqKj7NzEw/AAAAAAAAgD8AAAAAzcxMPwAAgD+amRk/VVVVP5qZGT+qqio/mpkZPwAAAD+amRk/qqqqPpqZGT+sqio+mpkZPwAAAACamRk/AACAP8zMzD5VVVU/zMzMPqqqKj/MzMw+AAAAP8zMzD6qqqo+zMzMPqyqKj7MzMw+AAAAAMzMzD4AAIA/zMxMPlVVVT/MzEw+qqoqP8zMTD4AAAA/zMxMPqqqqj7MzEw+rKoqPszMTD4AAAAAzMxMPgAAgD8AAAAAVVVVPwAAAACqqio/AAAAAAAAAD8AAAAAqqqqPgAAAACsqio+AAAAAAAAAAAAAAAA"),
+"format": 34359742487,
+"index_count": 180,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAQAEAAMABAAFAAMABAAGAAUABgAHAAUABgAIAAcACAAJAAcACAAKAAkACgALAAkACgAMAAsADAANAAsAAgADAA4AAwAPAA4AAwAFAA8ABQAQAA8ABQAHABAABwARABAABwAJABEACQASABEACQALABIACwATABIACwANABMADQAUABMADgAPABUADwAWABUADwAQABYAEAAXABYAEAARABcAEQAYABcAEQASABgAEgAZABgAEgATABkAEwAaABkAEwAUABoAFAAbABoAFQAWABwAFgAdABwAFgAXAB0AFwAeAB0AFwAYAB4AGAAfAB4AGAAZAB8AGQAgAB8AGQAaACAAGgAhACAAGgAbACEAGwAiACEAHAAdACMAHQAkACMAHQAeACQAHgAlACQAHgAfACUAHwAmACUAHwAgACYAIAAnACYAIAAhACcAIQAoACcAIQAiACgAIgApACgA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 42,
+"vertex_data": PackedByteArray("AAAgQg2ekEAAAABCVVXVQXJCyEAAAABCAAAgQm1ApUCamZlBVVXVQR+JlECamZlBVVVVQU+XxEAAAABCVVVVQfzkfUCamZlBq6qqtAFbREAAAABCq6qqtPeZU0CamZlBVlVVwYbjY0AAAABCVlVVwTTdkz+amZlBVlXVwQ5rzT8AAABCVlXVwW3BJT+amZlBAAAgwmiPgkAAAABCAAAgwg/Zyz+amZlBAAAgQtwPM0DOzMxAVVXVQQJms73OzMxAVVVVQcZC/T7OzMxAq6qqtElDuj/OzMxAVlVVwU1Wrz/OzMxAVlXVwUKigz/OzMxAAAAgwrZ/hEDOzMxAAAAgQjCfC8DMzMzAVVXVQTi708DMzMzAVVVVQXunhMDMzMzAq6qqtP0ccsDMzMzAVlVVwemObsDMzMzAVlXVwXSbCcDMzMzAAAAgwlqgDsDMzMzAAAAgQqIGlcCZmZnBVVXVQUCogcCZmZnBVVVVQUeqpMCZmZnBq6qqtMD0B8GZmZnBVlVVweV7iMCZmZnBVlXVweloy8CZmZnBAAAgwlS3vcCZmZnBAAAgQhxzTMD////BVVXVQZpnPr/////BVVVVQbev77/////Bq6qqtM27EsH////BVlVVwRKpp8D////BVlXVwQou28D////BAAAgwhkNtcD////BIo5m7P///78Yi8f8////vxKM+P3///+/cWN0+f///79ZZj32////v/Zkfvn///+/GHL29v///7+HbVv6////vwxqivb///+/IWwj9v///7/zjPH/////v5iJm/v///+/o5r98v///7/6jd/w////v1BXgPL///+/TFQJ9v///78Po136////v11n4v////+/vmo5/v///7+SlVn1////v+ef7PD///+/bk1I6f///7+Yae/8////vyiZCfn///+/q10T/f///79IoE/3////v8GfBPv///+/+6JV/////79Pdzvy////vyGFJer///+/+3JM7v///7/zbVb5////v12XSPP///+//WaN+f///7/PkEj6////vymLmuL///+/f4Bi5f///7+bZo7Y////v3KLnvv///+/7Yet/////79jgvH/////v0yKQfP///+/")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vr8o3"]
+albedo_color = Color(0.28435934, 0.44193697, 0.28471005, 1)
+albedo_texture = ExtResource("3_6vcge")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ip0br"]
+data = PackedVector3Array(40, 4.5193, 32, 26.666698, 6.2581, 32, 40, 5.1640997, 19.199999, 26.666698, 6.2581, 32, 26.666698, 4.6417, 19.199999, 40, 5.1640997, 19.199999, 26.666698, 6.2581, 32, 13.3333, 6.1435, 32, 26.666698, 4.6417, 19.199999, 13.3333, 6.1435, 32, 13.3333, 3.9671, 19.199999, 26.666698, 4.6417, 19.199999, 13.3333, 6.1435, 32, 0, 3.0681, 32, 13.3333, 3.9671, 19.199999, 0, 3.0681, 32, 0, 3.3063, 19.199999, 13.3333, 3.9671, 19.199999, 0, 3.0681, 32, -13.3333, 3.5607998, 32, 0, 3.3063, 19.199999, -13.3333, 3.5607998, 32, -13.3333, 1.1552, 19.199999, 0, 3.3063, 19.199999, -13.3333, 3.5607998, 32, -26.666698, 1.6048, 32, -13.3333, 1.1552, 19.199999, -26.666698, 1.6048, 32, -26.666698, 0.6475, 19.199999, -13.3333, 1.1552, 19.199999, -26.666698, 1.6048, 32, -40, 4.08, 32, -26.666698, 0.6475, 19.199999, -40, 4.08, 32, -40, 1.5926, 19.199999, -26.666698, 0.6475, 19.199999, 40, 5.1640997, 19.199999, 26.666698, 4.6417, 19.199999, 40, 2.7977998, 6.3999996, 26.666698, 4.6417, 19.199999, 26.666698, -0.0876, 6.3999996, 40, 2.7977998, 6.3999996, 26.666698, 4.6417, 19.199999, 13.3333, 3.9671, 19.199999, 26.666698, -0.0876, 6.3999996, 13.3333, 3.9671, 19.199999, 13.3333, 0.49469998, 6.3999996, 26.666698, -0.0876, 6.3999996, 13.3333, 3.9671, 19.199999, 0, 3.3063, 19.199999, 13.3333, 0.49469998, 6.3999996, 0, 3.3063, 19.199999, 0, 1.4552, 6.3999996, 13.3333, 0.49469998, 6.3999996, 0, 3.3063, 19.199999, -13.3333, 1.1552, 19.199999, 0, 1.4552, 6.3999996, -13.3333, 1.1552, 19.199999, -13.3333, 1.3698, 6.3999996, 0, 1.4552, 6.3999996, -13.3333, 1.1552, 19.199999, -26.666698, 0.6475, 19.199999, -13.3333, 1.3698, 6.3999996, -26.666698, 0.6475, 19.199999, -26.666698, 1.0284, 6.3999996, -13.3333, 1.3698, 6.3999996, -26.666698, 0.6475, 19.199999, -40, 1.5926, 19.199999, -26.666698, 1.0284, 6.3999996, -40, 1.5926, 19.199999, -40, 4.1405997, 6.3999996, -26.666698, 1.0284, 6.3999996, 40, 2.7977998, 6.3999996, 26.666698, -0.0876, 6.3999996, 40, -2.1815999, -6.3999996, 26.666698, -0.0876, 6.3999996, 26.666698, -6.6166, -6.3999996, 40, -2.1815999, -6.3999996, 26.666698, -0.0876, 6.3999996, 13.3333, 0.49469998, 6.3999996, 26.666698, -6.6166, -6.3999996, 13.3333, 0.49469998, 6.3999996, 13.3333, -4.1454, -6.3999996, 26.666698, -6.6166, -6.3999996, 13.3333, 0.49469998, 6.3999996, 0, 1.4552, 6.3999996, 13.3333, -4.1454, -6.3999996, 0, 1.4552, 6.3999996, 0, -3.783, -6.3999996, 13.3333, -4.1454, -6.3999996, 0, 1.4552, 6.3999996, -13.3333, 1.3698, 6.3999996, 0, -3.783, -6.3999996, -13.3333, 1.3698, 6.3999996, -13.3333, -3.7275, -6.3999996, 0, -3.783, -6.3999996, -13.3333, 1.3698, 6.3999996, -26.666698, 1.0284, 6.3999996, -13.3333, -3.7275, -6.3999996, -26.666698, 1.0284, 6.3999996, -26.666698, -2.1501, -6.3999996, -13.3333, -3.7275, -6.3999996, -26.666698, 1.0284, 6.3999996, -40, 4.1405997, 6.3999996, -26.666698, -2.1501, -6.3999996, -40, 4.1405997, 6.3999996, -40, -2.2285, -6.3999996, -26.666698, -2.1501, -6.3999996, 40, -2.1815999, -6.3999996, 26.666698, -6.6166, -6.3999996, 40, -4.6570997, -19.199999, 26.666698, -6.6166, -6.3999996, 26.666698, -4.0518, -19.199999, 40, -4.6570997, -19.199999, 26.666698, -6.6166, -6.3999996, 13.3333, -4.1454, -6.3999996, 26.666698, -4.0518, -19.199999, 13.3333, -4.1454, -6.3999996, 13.3333, -5.1457996, -19.199999, 26.666698, -4.0518, -19.199999, 13.3333, -4.1454, -6.3999996, 0, -3.783, -6.3999996, 13.3333, -5.1457996, -19.199999, 0, -3.783, -6.3999996, 0, -8.4973, -19.199999, 13.3333, -5.1457996, -19.199999, 0, -3.783, -6.3999996, -13.3333, -3.7275, -6.3999996, 0, -8.4973, -19.199999, -13.3333, -3.7275, -6.3999996, -13.3333, -4.2651, -19.199999, 0, -8.4973, -19.199999, -13.3333, -3.7275, -6.3999996, -26.666698, -2.1501, -6.3999996, -13.3333, -4.2651, -19.199999, -26.666698, -2.1501, -6.3999996, -26.666698, -6.3566, -19.199999, -13.3333, -4.2651, -19.199999, -26.666698, -2.1501, -6.3999996, -40, -2.2285, -6.3999996, -26.666698, -6.3566, -19.199999, -40, -2.2285, -6.3999996, -40, -5.9286, -19.199999, -26.666698, -6.3566, -19.199999, 40, -4.6570997, -19.199999, 26.666698, -4.0518, -19.199999, 40, -3.1945, -32, 26.666698, -4.0518, -19.199999, 26.666698, -0.7438, -32, 40, -3.1945, -32, 26.666698, -4.0518, -19.199999, 13.3333, -5.1457996, -19.199999, 26.666698, -0.7438, -32, 13.3333, -5.1457996, -19.199999, 13.3333, -1.8725, -32, 26.666698, -0.7438, -32, 13.3333, -5.1457996, -19.199999, 0, -8.4973, -19.199999, 13.3333, -1.8725, -32, 0, -8.4973, -19.199999, 0, -9.170899, -32, 13.3333, -1.8725, -32, 0, -8.4973, -19.199999, -13.3333, -4.2651, -19.199999, 0, -9.170899, -32, -13.3333, -4.2651, -19.199999, -13.3333, -5.2394, -32, 0, -9.170899, -32, -13.3333, -4.2651, -19.199999, -26.666698, -6.3566, -19.199999, -13.3333, -5.2394, -32, -26.666698, -6.3566, -19.199999, -26.666698, -6.8494, -32, -13.3333, -5.2394, -32, -26.666698, -6.3566, -19.199999, -40, -5.9286, -19.199999, -26.666698, -6.8494, -32, -40, -5.9286, -19.199999, -40, -5.6577997, -32, -26.666698, -6.8494, -32)
+
+[sub_resource type="Resource" id="Resource_xyero"]
+script = ExtResource("7_4puye")
+amount = 50
+restrict_height = true
+reference_frame = 1
+
+[sub_resource type="Resource" id="Resource_tcusk"]
+script = ExtResource("8_q13xq")
+position = Vector3(0.15, 0.15, 0.15)
+rotation = Vector3(5, 360, 5)
+scale = Vector3(0.1, 0.1, 0.1)
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_4puye"]
+script = ExtResource("9_u43bj")
+offset_step = 0.2
+consecutive_step_multiplier = 0.75
+restrict_height = true
+
+[sub_resource type="Resource" id="Resource_q13xq"]
+script = ExtResource("10_jvjdd")
+ray_length = 32.0
+ray_offset = 5.0
+collision_mask = 4
+
+[sub_resource type="Resource" id="Resource_jvjdd"]
+script = ExtResource("11_yxnar")
+scale = Vector3(3, 3, 3)
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_yxnar"]
+script = ExtResource("5_xyero")
+stack = Array[ExtResource("6_tcusk")]([SubResource("Resource_xyero"), SubResource("Resource_tcusk"), SubResource("Resource_4puye"), SubResource("Resource_q13xq"), SubResource("Resource_jvjdd")])
+
+[sub_resource type="Resource" id="Resource_u43bj"]
+script = ExtResource("14_qw82i")
+size = Vector3(80, 32, 64)
+metadata/_custom_type_script = "uid://bmfbe715km8ok"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8uw0o"]
+shader = ExtResource("16_01xyg")
+shader_parameter/sky_visible = true
+shader_parameter/color_correction = Vector2(0, 1)
+shader_parameter/ground_color = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/horizon_offset = 0.0
+shader_parameter/atm_darkness = 0.5
+shader_parameter/atm_sun_intensity = 18.0
+shader_parameter/atm_day_tint = Color(0.807843, 0.909804, 1, 1)
+shader_parameter/atm_horizon_light_tint = Color(0.980392, 0.635294, 0.462745, 1)
+shader_parameter/atm_night_tint = Color(0.098639965, 0.1169919, 0.14681312, 0.5849595)
+shader_parameter/atm_level_params = Vector3(1, 0, 0)
+shader_parameter/atm_thickness = 0.7
+shader_parameter/atm_beta_ray = Vector3(5.804544e-06, 1.3562913e-05, 3.311258e-05)
+shader_parameter/atm_beta_mie = Vector3(3.038e-08, 3.038e-08, 3.038e-08)
+shader_parameter/sun_light_color = Color(0.98, 0.523, 0.294, 1)
+shader_parameter/sun_disk_color = Color(0.996094, 0.541334, 0.140076, 1)
+shader_parameter/sun_disk_intensity = 30.0
+shader_parameter/sun_disk_size = 0.02
+shader_parameter/atm_sun_mie_tint = Color(1, 1, 1, 1)
+shader_parameter/atm_sun_mie_intensity = 1.0
+shader_parameter/atm_sun_partial_mie_phase = Vector3(0.36, 1.64, 1.6)
+shader_parameter/moon_color = Color(1, 1, 1, 1)
+shader_parameter/moon_texture = ExtResource("19_b4jiv")
+shader_parameter/moon_texture_alignment = Vector3(7, 1.4, 4.8)
+shader_parameter/moon_texture_flip_u = false
+shader_parameter/moon_texture_flip_v = false
+shader_parameter/moon_size = 0.07
+shader_parameter/atm_moon_mie_tint = Color(0.137255, 0.184314, 0.292196, 1)
+shader_parameter/atm_moon_mie_intensity = 0.4094716674089432
+shader_parameter/atm_moon_partial_mie_phase = Vector3(0.36, 1.64, 1.6)
+shader_parameter/starmap_color = Color(0.709804, 0.709804, 0.709804, 0.854902)
+shader_parameter/starmap_texture = ExtResource("22_ybca7")
+shader_parameter/starmap_flip_u = false
+shader_parameter/starmap_flip_v = false
+shader_parameter/starmap_alignment = Vector3(2.68288, -0.25891, 0.40101)
+shader_parameter/star_rotation_offset = 9.38899
+shader_parameter/star_rotation = -13.086479861815507
+shader_parameter/star_tilt = -1.2915436464758039
+shader_parameter/star_field_color = Color(1, 1, 1, 1)
+shader_parameter/star_field_texture = ExtResource("21_vanrq")
+shader_parameter/star_scintillation = 0.75
+shader_parameter/star_scintillation_speed = 0.01
+shader_parameter/noise_tex = ExtResource("20_68b7m")
+shader_parameter/clouds_night_color = Color(0.090196, 0.094118, 0.129412, 1)
+shader_parameter/cirrus_visible = true
+shader_parameter/cirrus_intensity = 2.0
+shader_parameter/cirrus_coverage = 0.5
+shader_parameter/cirrus_thickness = 1.7
+shader_parameter/cirrus_absorption = 2.0
+shader_parameter/cirrus_sky_tint_fade = 0.5
+shader_parameter/cirrus_size = 1.0
+shader_parameter/cirrus_uv = Vector2(0.16, 0.11)
+shader_parameter/cirrus_position1 = Vector2(0.098622344, 0.098622344)
+shader_parameter/cirrus_position2 = Vector2(0.098622344, 0.098622344)
+shader_parameter/cirrus_texture = ExtResource("17_764ux")
+shader_parameter/cumulus_visible = true
+shader_parameter/cumulus_intensity = 0.6
+shader_parameter/cumulus_coverage = 0.55
+shader_parameter/cumulus_thickness = 0.0243
+shader_parameter/cumulus_absorption = 2.0
+shader_parameter/cumulus_noise_freq = 2.7
+shader_parameter/cumulus_sky_tint_fade = 0.0
+shader_parameter/cumulus_size = 0.5
+shader_parameter/cumulus_position = Vector2(0.4930659, 0.4930659)
+shader_parameter/cumulus_texture = ExtResource("18_wadof")
+shader_parameter/cumulus_partial_mie_phase = Vector3(0.957564, 1.042436, 0.412)
+shader_parameter/cumulus_mie_intensity = 1.0
+shader_parameter/show_azimuthal_grid = false
+shader_parameter/azimuthal_grid_color = Color(0.87058824, 0.72156864, 0.5294118, 1)
+shader_parameter/azimuthal_grid_rotation_offset = 0.03
+shader_parameter/show_equatorial_grid = false
+shader_parameter/equatorial_grid_color = Color(0, 0.75, 1, 1)
+shader_parameter/equatorial_grid_rotation_offset = 0.03
+shader_parameter/moon_matrix = Basis(0, 0.15919192, -0.9872476, -0.9545783, -0.2941604, -0.04743284, -0.2979601, 0.94240516, 0.15196116)
+
+[sub_resource type="Sky" id="Sky_ql5ya"]
+sky_material = SubResource("ShaderMaterial_8uw0o")
+
+[sub_resource type="Environment" id="Environment_ka3nr"]
+background_mode = 2
+sky = SubResource("Sky_ql5ya")
+ambient_light_source = 3
+ambient_light_color = Color(0.35, 0.28642783, 0.2865088, 1)
+ambient_light_sky_contribution = 0.7
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_white = 6.0
+fog_mode = 1
+fog_light_color = Color(0.10524041, 0.10524041, 0.1052404, 1)
+fog_density = 1.0
+fog_aerial_perspective = 0.441
+fog_depth_curve = 0.2102241
+fog_depth_begin = 30.0
+fog_depth_end = 50.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_qywvv"]
+
+[sub_resource type="Animation" id="Animation_3wgol"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Camera/SubViewportContainer/SubViewport/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.0423508, -5.5206814, -7.290971)]
+}
+
+[sub_resource type="Animation" id="Animation_1acrt"]
+resource_name = "camera_sway"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Camera/SubViewportContainer/SubViewport/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2.01, 2.99, 4.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(2.0423508, -5.5206814, -7.290971), Vector3(1.614, -5.276, -7.506), Vector3(2.027, -5.015, -7.531), Vector3(2.601, -5.316, -7.531), Vector3(2.0423508, -5.5206814, -7.290971)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ln24"]
+_data = {
+&"RESET": SubResource("Animation_3wgol"),
+&"camera_sway": SubResource("Animation_1acrt")
+}
+
+[node name="MainMenu" type="CanvasLayer" unique_id=594816427]
+script = ExtResource("1_jk1qb")
+
+[node name="Background" type="Node3D" parent="." unique_id=655625705]
+
+[node name="Camera" type="Node3D" parent="Background" unique_id=543911587]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Background/Camera" unique_id=845987952]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Background/Camera/SubViewportContainer" unique_id=1255202009]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Background/Camera/SubViewportContainer/SubViewport" unique_id=1108630054]
+transform = Transform3D(1, 0, 0, 0, 0.9660342, -0.25841442, 0, 0.25841442, 0.9660342, 2.0423508, -5.5206814, -7.290971)
+fov = 45.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Background/Camera/SubViewportContainer/SubViewport/Camera3D" unique_id=1277536050]
+light_energy = 4.158
+spot_range = 4096.0
+spot_angle = 50.0
+
+[node name="Environment" type="Node3D" parent="Background" unique_id=2139143375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.529958, -6.443846)
+
+[node name="Terrain" type="StaticBody3D" parent="Background/Environment" unique_id=1884446992]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 8, -32)
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("2_dj67d")
+width = 80.0
+length = 64.0
+noise = SubResource("FastNoiseLite_flqon")
+
+[node name="TerrainMesh" type="MeshInstance3D" parent="Background/Environment/Terrain" unique_id=1955141195]
+mesh = SubResource("ArrayMesh_6vcge")
+surface_material_override/0 = SubResource("StandardMaterial3D_vr8o3")
+
+[node name="TerrainCollision" type="CollisionShape3D" parent="Background/Environment/Terrain" unique_id=1560616066]
+shape = SubResource("ConcavePolygonShape3D_ip0br")
+
+[node name="Props" type="Node3D" parent="Background/Environment" unique_id=813842922]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+
+[node name="Trees" type="Node3D" parent="Background/Environment/Props" unique_id=183022491]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.454466, -8)
+script = ExtResource("4_ip0br")
+modifier_stack = SubResource("Resource_yxnar")
+Performance/use_chunks = true
+Performance/chunk_dimensions = Vector3(15, 15, 15)
+metadata/_custom_type_script = "uid://wrqel3132hbv"
+
+[node name="ScatterItem" type="Node3D" parent="Background/Environment/Props/Trees" unique_id=271840919]
+script = ExtResource("12_eku7s")
+path = "uid://1qgn8bnadfn8"
+
+[node name="ScatterShape" type="Node3D" parent="Background/Environment/Props/Trees" unique_id=313127983]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 8.348396, -24)
+script = ExtResource("13_c6nra")
+shape = SubResource("Resource_u43bj")
+
+[node name="Ghost" parent="Background/Environment/Props" unique_id=482712621 instance=ExtResource("15_1468l")]
+transform = Transform3D(-0.42989665, 0, 0.9028781, 0, 1, 0, -0.9028781, 0, -0.42989665, 6.0321293, -5.105974, -9.217987)
+prop = true
+prop_eyes = 1
+
+[node name="Ghost2" parent="Background/Environment/Props" unique_id=997308693 instance=ExtResource("15_1468l")]
+transform = Transform3D(-0.82209456, 0, -0.5693513, 0, 1, 0, 0.5693513, 0, -0.82209456, -12.320126, -2.3025532, -23.410929)
+prop = true
+prop_eyes = 1
+
+[node name="Ghost3" parent="Background/Environment/Props" unique_id=1006544357 instance=ExtResource("15_1468l")]
+transform = Transform3D(-0.95347524, 0, 0.30147135, 0, 1, 0, -0.30147135, 0, -0.95347524, 6.6576166, -3.5958757, -22.714258)
+prop = true
+prop_eyes = 1
+
+[node name="Sky3D" type="WorldEnvironment" parent="Background/Environment" unique_id=853845514]
+environment = SubResource("Environment_ka3nr")
+camera_attributes = SubResource("CameraAttributesPractical_qywvv")
+script = ExtResource("23_k5xsf")
+editor_time_enabled = false
+game_time_enabled = false
+current_time = 18.68
+wind_direction = 2.35619451204804
+metadata/_custom_type_script = "uid://deo0gxkmk2ahd"
+
+[node name="SunLight" type="DirectionalLight3D" parent="Background/Environment/Sky3D" unique_id=706662885]
+transform = Transform3D(0.32817653, -0.26917747, -0.90545225, 0, 0.9585396, -0.28495955, 0.94461644, 0.093517035, 0.3145702, -0.9054522, -0.28495952, 0.31457016)
+light_color = Color(0.98, 0.523, 0.294, 1)
+light_energy = 0.0
+
+[node name="MoonLight" type="DirectionalLight3D" parent="Background/Environment/Sky3D" unique_id=809028145]
+transform = Transform3D(0, -0.9545783, -0.2979601, 0.15919192, -0.2941604, 0.9424052, -0.98724765, -0.04743284, 0.15196116, -0.2979601, 0.9424052, 0.15196116)
+light_color = Color(0.572549, 0.776471, 0.956863, 1)
+light_energy = 0.03708942
+shadow_enabled = true
+
+[node name="SkyDome" type="Node" parent="Background/Environment/Sky3D" unique_id=1016561098]
+script = ExtResource("24_71lbq")
+sun_azimuth = -4.3780165
+sun_altitude = -1.8597605
+moon_azimuth = -4.2407694
+moon_altitude = -0.34104633
+fog_density = 0.38731143
+fog_start = 10.0
+fog_end = 25.0
+fog_falloff = 0.75
+fog_rayleigh_depth = 0.02255676
+wind_direction = 2.35619451204804
+
+[node name="TimeOfDay" type="Node" parent="Background/Environment/Sky3D" unique_id=401132453]
+script = ExtResource("25_akqfu")
+editor_time_enabled = false
+game_time_enabled = false
+dome_path = NodePath("../SkyDome")
+current_time = 18.68
+day = 6
+
+[node name="Menu" type="Control" parent="." unique_id=57303604]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("13_3wgol")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu" unique_id=902666045]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 120
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer" unique_id=1176695218]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Menu/MarginContainer/VBoxContainer" unique_id=1015451733]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "The Forests of Threnody"
+
+[node name="Title Gap" type="MarginContainer" parent="Menu/MarginContainer/VBoxContainer" unique_id=1149247683]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Start" type="Button" parent="Menu/MarginContainer/VBoxContainer" unique_id=1198205004]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 100
+text = "Start Game"
+flat = true
+
+[node name="Button Gap" type="MarginContainer" parent="Menu/MarginContainer/VBoxContainer" unique_id=284387267]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Settings" type="Button" parent="Menu/MarginContainer/VBoxContainer" unique_id=50100560]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 100
+disabled = true
+text = "Settings
+"
+flat = true
+
+[node name="Button Gap2" type="MarginContainer" parent="Menu/MarginContainer/VBoxContainer" unique_id=1331525579]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Quit" type="Button" parent="Menu/MarginContainer/VBoxContainer" unique_id=1613196313]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 100
+text = "Quit Game
+"
+flat = true
+script = ExtResource("26_1acrt")
+
+[node name="Job Board" type="Control" parent="." unique_id=912594211]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("13_3wgol")
+
+[node name="MarginContainer" type="MarginContainer" parent="Job Board" unique_id=932079496]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Job Board/MarginContainer" unique_id=880346846]
+layout_mode = 2
+
+[node name="Jobs Title" type="Label" parent="Job Board/MarginContainer/VBoxContainer" unique_id=1071109234]
+custom_minimum_size = Vector2(1244.695, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 130
+text = "Urgent Deliveries"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Job Board/MarginContainer/VBoxContainer" unique_id=683689173]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Job Board/MarginContainer/VBoxContainer/MarginContainer" unique_id=427363269]
+layout_mode = 2
+color = Color(0.07, 0.07, 0.07, 0.60784316)
+
+[node name="MarginContainer" type="MarginContainer" parent="Job Board/MarginContainer/VBoxContainer/MarginContainer" unique_id=97928416]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="MissionChoices" type="VBoxContainer" parent="Job Board/MarginContainer/VBoxContainer/MarginContainer/MarginContainer" unique_id=43453358]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+script = ExtResource("6_lgwnu")
+
+[node name="Money Counter" type="RichTextLabel" parent="Job Board/MarginContainer/VBoxContainer/MarginContainer/MarginContainer" unique_id=1052627013]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/normal_font_size = 60
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_tbmy8")
+
+[node name="MarginContainer" type="MarginContainer" parent="Job Board/MarginContainer/VBoxContainer/MarginContainer/MarginContainer" unique_id=491027709]
+custom_minimum_size = Vector2(1100, 650)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+
+[node name="MissionDescription" type="RichTextLabel" parent="Job Board/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/MarginContainer" unique_id=279333321]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 45
+text = "Lorem Ipsum Dolor Sit Amet"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="Job Board/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/MarginContainer/MissionDescription" unique_id=1315220534]
+visible = false
+custom_minimum_size = Vector2(750, 150)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -8.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 70
+text = "Start Mission"
+flat = true
+
+[node name="Button Bar" type="MarginContainer" parent="Job Board" unique_id=845897432]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -177.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
+
+[node name="Shop" type="Button" parent="Job Board/Button Bar" unique_id=2123996625]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 100
+text = "Shop "
+flat = true
+
+[node name="Main Menu" type="Button" parent="Job Board/Button Bar" unique_id=541778979]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 100
+text = "Menu"
+flat = true
+
+[node name="Shop" type="Control" parent="." unique_id=71526789]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("13_3wgol")
+
+[node name="MarginContainer" type="MarginContainer" parent="Shop" unique_id=1288028136]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/MarginContainer" unique_id=728316634]
+layout_mode = 2
+
+[node name="Jobs Title" type="Label" parent="Shop/MarginContainer/VBoxContainer" unique_id=1245872162]
+custom_minimum_size = Vector2(832.7, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 130
+text = "Upgrades"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Shop/MarginContainer/VBoxContainer" unique_id=235825358]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Shop/MarginContainer/VBoxContainer/MarginContainer" unique_id=214555970]
+layout_mode = 2
+color = Color(0.07, 0.07, 0.07, 0.60784316)
+
+[node name="Money Counter" type="RichTextLabel" parent="Shop/MarginContainer/VBoxContainer/MarginContainer" unique_id=328967155]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/normal_font_size = 60
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_tbmy8")
+
+[node name="MarginContainer" type="MarginContainer" parent="Shop/MarginContainer/VBoxContainer/MarginContainer" unique_id=1088259801]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Item Choice" type="VBoxContainer" parent="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer" unique_id=894252947]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+script = ExtResource("30_6h3lr")
+silver_cost = null
+pewter_cost = null
+magnesium_cost = null
+aluminum_cost = null
+
+[node name="Silver" type="Button" parent="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/Item Choice" unique_id=140181117]
+layout_mode = 2
+text = "Silver"
+flat = true
+
+[node name="Pewter" type="Button" parent="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/Item Choice" unique_id=1982922229]
+layout_mode = 2
+text = "Pewter"
+flat = true
+
+[node name="Magnesium" type="Button" parent="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/Item Choice" unique_id=191943759]
+layout_mode = 2
+text = "Magnesium"
+flat = true
+
+[node name="Aluminum" type="Button" parent="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/Item Choice" unique_id=700039067]
+layout_mode = 2
+text = "Aluminum"
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer" unique_id=1866362863]
+custom_minimum_size = Vector2(1100, 650)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+
+[node name="Item Description" type="RichTextLabel" parent="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/MarginContainer" unique_id=764029120]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 45
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/MarginContainer/Item Description" unique_id=1957439554]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 75
+
+[node name="Buy Button" type="Button" parent="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/MarginContainer/Item Description/MarginContainer" unique_id=656646558]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 70
+text = "Purchase"
+flat = true
+
+[node name="Equip Button" type="Button" parent="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/MarginContainer/Item Description/MarginContainer" unique_id=1048802652]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 70
+text = "Equip"
+flat = true
+
+[node name="Button Bar" type="MarginContainer" parent="Shop" unique_id=1649367735]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -203.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
+
+[node name="Main Menu" type="Button" parent="Shop/Button Bar" unique_id=430732872]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 100
+text = "Menu"
+flat = true
+
+[node name="Job Board" type="Button" parent="Shop/Button Bar" unique_id=2017619252]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 100
+text = "Jobs"
+flat = true
+
+[node name="Loading Screen" parent="." unique_id=1527059394 instance=ExtResource("28_1a85y")]
+visible = false
+num_items = 1
+min_wait = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2001613107]
+libraries/ = SubResource("AnimationLibrary_8ln24")
+autoplay = &"camera_sway"
+speed_scale = 0.25
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2111356110]
+stream = ExtResource("32_dj67d")
+autoplay = true
+
+[connection signal="build_completed" from="Background/Environment/Props/Trees" to="Loading Screen" method="item_ready"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Start" to="." method="_job_button"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Quit" to="Menu/MarginContainer/VBoxContainer/Quit" method="_on_pressed"]
+[connection signal="pressed" from="Job Board/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/MarginContainer/MissionDescription/StartButton" to="Job Board/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/MissionChoices" method="_start_mission"]
+[connection signal="pressed" from="Job Board/Button Bar/Shop" to="." method="_shop_button"]
+[connection signal="pressed" from="Job Board/Button Bar/Main Menu" to="." method="_menu_button"]
+[connection signal="pressed" from="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/Item Choice/Silver" to="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/Item Choice" method="_silver"]
+[connection signal="pressed" from="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/Item Choice/Pewter" to="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/Item Choice" method="_pewter"]
+[connection signal="pressed" from="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/Item Choice/Magnesium" to="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/Item Choice" method="_magnesium"]
+[connection signal="pressed" from="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/Item Choice/Aluminum" to="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/Item Choice" method="_aluminum"]
+[connection signal="pressed" from="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/MarginContainer/Item Description/MarginContainer/Buy Button" to="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/Item Choice" method="_buy"]
+[connection signal="pressed" from="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/MarginContainer/Item Description/MarginContainer/Equip Button" to="Shop/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/Item Choice" method="_equip"]
+[connection signal="pressed" from="Shop/Button Bar/Main Menu" to="." method="_menu_button"]
+[connection signal="pressed" from="Shop/Button Bar/Job Board" to="." method="_job_button"]

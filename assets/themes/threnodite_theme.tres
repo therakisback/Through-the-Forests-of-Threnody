@@ -1,0 +1,24 @@
+[gd_resource type="Theme" format=3 uid="uid://dtxdvdh81ssq3"]
+
+[ext_resource type="FontFile" uid="uid://daeyo2ajg137h" path="res://assets/themes/fonts/Runavess Demo.otf" id="1_itn7p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_itn7p"]
+bg_color = Color(0.47, 0.023500005, 0.023500005, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a2y64"]
+bg_color = Color(0.7529412, 0.7529412, 0.7529412, 1)
+
+[resource]
+default_font = ExtResource("1_itn7p")
+default_font_size = 16
+Button/colors/font_hover_color = Color(0.2901961, 1, 0.37254903, 1)
+Button/colors/font_hover_pressed_color = Color(0.92156863, 0.28235295, 0.28235295, 1)
+Button/colors/font_pressed_color = Color(0.70980394, 0, 0, 1)
+Button/font_sizes/font_size = 75
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/shadow_offset_x = 10
+Label/constants/shadow_offset_y = 10
+Label/font_sizes/font_size = 160
+ProgressBar/styles/background = SubResource("StyleBoxFlat_itn7p")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_a2y64")
+RichTextLabel/font_sizes/normal_font_size = 30

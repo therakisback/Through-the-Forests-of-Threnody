@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cktm467bwa8x7"]
+
+[ext_resource type="Script" uid="uid://c53bt47ikj56k" path="res://scripts/job_button.gd" id="1_pi3h0"]
+
+[node name="Button" type="Button" unique_id=1045601258]
+script = ExtResource("1_pi3h0")

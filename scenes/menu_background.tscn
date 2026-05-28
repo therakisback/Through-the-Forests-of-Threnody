@@ -1,0 +1,307 @@
+[gd_scene format=4 uid="uid://dg36i1m7uggir"]
+
+[ext_resource type="Script" uid="uid://22qtqtihyu6j" path="res://scripts/terrain_gen.gd" id="1_2h8dh"]
+[ext_resource type="Texture2D" uid="uid://bo2g1gwi31fj2" path="res://assets/Retro PSX Style Wilderness Assets/Textures/Terrain/grassimg.png" id="2_sqmh0"]
+[ext_resource type="Script" uid="uid://wrqel3132hbv" path="res://addons/proton_scatter/src/scatter.gd" id="3_p3s2m"]
+[ext_resource type="Script" uid="uid://745yl4uuf6hx" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="4_kvc48"]
+[ext_resource type="Script" uid="uid://8acsbtxwoqfe" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="5_ifaa2"]
+[ext_resource type="Script" uid="uid://naj3afmrxmhe" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="6_04k72"]
+[ext_resource type="Script" uid="uid://bt5do50q3sb1i" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="7_7fw6j"]
+[ext_resource type="Script" uid="uid://ci5ras2buwccn" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="8_j5upa"]
+[ext_resource type="Script" uid="uid://bl7ukypk7347q" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="9_q35sh"]
+[ext_resource type="Script" uid="uid://drhxycqi44648" path="res://addons/proton_scatter/src/modifiers/offset_scale.gd" id="10_sj7oi"]
+[ext_resource type="Script" uid="uid://bxuv37fua3ywt" path="res://addons/proton_scatter/src/scatter_item.gd" id="11_yr67h"]
+[ext_resource type="Script" uid="uid://cxpye6b88m5pi" path="res://addons/proton_scatter/src/scatter_shape.gd" id="12_x17fb"]
+[ext_resource type="Script" uid="uid://bmfbe715km8ok" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="13_gmq17"]
+[ext_resource type="PackedScene" uid="uid://c6x8ypymqe7o4" path="res://scenes/ghost.tscn" id="14_j5a3n"]
+[ext_resource type="Shader" uid="uid://cvd0x7lon1ur6" path="res://addons/sky_3d/shaders/SkyMaterial.gdshader" id="15_vytbh"]
+[ext_resource type="Texture2D" uid="uid://cfqk60lpl5ljv" path="res://addons/sky_3d/assets/resources/SNoise.tres" id="16_0lrtt"]
+[ext_resource type="Texture2D" uid="uid://cecwdqjol0ckd" path="res://addons/sky_3d/assets/textures/noiseClouds.png" id="17_ig7e0"]
+[ext_resource type="Texture2D" uid="uid://2r8ylu6rg5dp" path="res://addons/sky_3d/assets/thirdparty/textures/moon/MoonMap.png" id="18_bcfm5"]
+[ext_resource type="Texture2D" uid="uid://djpfuyxkryegn" path="res://addons/sky_3d/assets/textures/noise.jpg" id="19_bbi4x"]
+[ext_resource type="Texture2D" uid="uid://bm7dot7t7u1q4" path="res://addons/sky_3d/assets/thirdparty/textures/milkyway/StarField.jpg" id="20_scoa5"]
+[ext_resource type="Texture2D" uid="uid://c1vwcdcdvb74a" path="res://addons/sky_3d/assets/thirdparty/textures/milkyway/Milkyway.jpg" id="21_i4m1h"]
+[ext_resource type="Script" uid="uid://deo0gxkmk2ahd" path="res://addons/sky_3d/src/Sky3D.gd" id="22_4j4oy"]
+[ext_resource type="Script" uid="uid://b4tkplvh7fq40" path="res://addons/sky_3d/src/SkyDome.gd" id="23_bhojl"]
+[ext_resource type="Script" uid="uid://cjmkcj8hwm7ts" path="res://addons/sky_3d/src/TimeOfDay.gd" id="24_65ar6"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_flqon"]
+offset = Vector3(0, -2.46, 0)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2h8dh"]
+_surfaces = [{
+"aabb": AABB(-40, -9.17085, -31.999998, 80, 15.428961, 64),
+"attribute_data": PackedByteArray("AACAPwAAgD9VVVU/AACAPwAAgD/NzEw/VVVVP83MTD+qqio/AACAP6qqKj/NzEw/AAAAPwAAgD8AAAA/zcxMP6qqqj4AAIA/qqqqPs3MTD+sqio+AACAP6yqKj7NzEw/AAAAAAAAgD8AAAAAzcxMPwAAgD+amRk/VVVVP5qZGT+qqio/mpkZPwAAAD+amRk/qqqqPpqZGT+sqio+mpkZPwAAAACamRk/AACAP8zMzD5VVVU/zMzMPqqqKj/MzMw+AAAAP8zMzD6qqqo+zMzMPqyqKj7MzMw+AAAAAMzMzD4AAIA/zMxMPlVVVT/MzEw+qqoqP8zMTD4AAAA/zMxMPqqqqj7MzEw+rKoqPszMTD4AAAAAzMxMPgAAgD8AAAAAVVVVPwAAAACqqio/AAAAAAAAAD8AAAAAqqqqPgAAAACsqio+AAAAAAAAAAAAAAAA"),
+"format": 34359742487,
+"index_count": 180,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAQAEAAMABAAFAAMABAAGAAUABgAHAAUABgAIAAcACAAJAAcACAAKAAkACgALAAkACgAMAAsADAANAAsAAgADAA4AAwAPAA4AAwAFAA8ABQAQAA8ABQAHABAABwARABAABwAJABEACQASABEACQALABIACwATABIACwANABMADQAUABMADgAPABUADwAWABUADwAQABYAEAAXABYAEAARABcAEQAYABcAEQASABgAEgAZABgAEgATABkAEwAaABkAEwAUABoAFAAbABoAFQAWABwAFgAdABwAFgAXAB0AFwAeAB0AFwAYAB4AGAAfAB4AGAAZAB8AGQAgAB8AGQAaACAAGgAhACAAGgAbACEAGwAiACEAHAAdACMAHQAkACMAHQAeACQAHgAlACQAHgAfACUAHwAmACUAHwAgACYAIAAnACYAIAAhACcAIQAoACcAIQAiACgAIgApACgA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 42,
+"vertex_data": PackedByteArray("AAAgQg2ekEAAAABCVVXVQXJCyEAAAABCAAAgQm1ApUCamZlBVVXVQR+JlECamZlBVVVVQU+XxEAAAABCVVVVQfzkfUCamZlBq6qqtAFbREAAAABCq6qqtPeZU0CamZlBVlVVwYbjY0AAAABCVlVVwTTdkz+amZlBVlXVwQ5rzT8AAABCVlXVwW3BJT+amZlBAAAgwmiPgkAAAABCAAAgwg/Zyz+amZlBAAAgQtwPM0DOzMxAVVXVQQJms73OzMxAVVVVQcZC/T7OzMxAq6qqtElDuj/OzMxAVlVVwU1Wrz/OzMxAVlXVwUKigz/OzMxAAAAgwrZ/hEDOzMxAAAAgQjCfC8DMzMzAVVXVQTi708DMzMzAVVVVQXunhMDMzMzAq6qqtP0ccsDMzMzAVlVVwemObsDMzMzAVlXVwXSbCcDMzMzAAAAgwlqgDsDMzMzAAAAgQqIGlcCZmZnBVVXVQUCogcCZmZnBVVVVQUeqpMCZmZnBq6qqtMD0B8GZmZnBVlVVweV7iMCZmZnBVlXVweloy8CZmZnBAAAgwlS3vcCZmZnBAAAgQhxzTMD////BVVXVQZpnPr/////BVVVVQbev77/////Bq6qqtM27EsH////BVlVVwRKpp8D////BVlXVwQou28D////BAAAgwhkNtcD////BIo5m7P///78Yi8f8////vxKM+P3///+/cWN0+f///79ZZj32////v/Zkfvn///+/GHL29v///7+HbVv6////vwxqivb///+/IWwj9v///7/zjPH/////v5iJm/v///+/o5r98v///7/6jd/w////v1BXgPL///+/TFQJ9v///78Po136////v11n4v////+/vmo5/v///7+SlVn1////v+ef7PD///+/bk1I6f///7+Yae/8////vyiZCfn///+/q10T/f///79IoE/3////v8GfBPv///+/+6JV/////79Pdzvy////vyGFJer///+/+3JM7v///7/zbVb5////v12XSPP///+//WaN+f///7/PkEj6////vymLmuL///+/f4Bi5f///7+bZo7Y////v3KLnvv///+/7Yet/////79jgvH/////v0yKQfP///+/")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vr8o3"]
+albedo_color = Color(0.28435934, 0.44193697, 0.28471005, 1)
+albedo_texture = ExtResource("2_sqmh0")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_sqmh0"]
+data = PackedVector3Array(40, 4.5193, 32, 26.666698, 6.2581, 32, 40, 5.1640997, 19.199999, 26.666698, 6.2581, 32, 26.666698, 4.6417, 19.199999, 40, 5.1640997, 19.199999, 26.666698, 6.2581, 32, 13.3333, 6.1435, 32, 26.666698, 4.6417, 19.199999, 13.3333, 6.1435, 32, 13.3333, 3.9671, 19.199999, 26.666698, 4.6417, 19.199999, 13.3333, 6.1435, 32, 0, 3.0681, 32, 13.3333, 3.9671, 19.199999, 0, 3.0681, 32, 0, 3.3063, 19.199999, 13.3333, 3.9671, 19.199999, 0, 3.0681, 32, -13.3333, 3.5607998, 32, 0, 3.3063, 19.199999, -13.3333, 3.5607998, 32, -13.3333, 1.1552, 19.199999, 0, 3.3063, 19.199999, -13.3333, 3.5607998, 32, -26.666698, 1.6048, 32, -13.3333, 1.1552, 19.199999, -26.666698, 1.6048, 32, -26.666698, 0.6475, 19.199999, -13.3333, 1.1552, 19.199999, -26.666698, 1.6048, 32, -40, 4.08, 32, -26.666698, 0.6475, 19.199999, -40, 4.08, 32, -40, 1.5926, 19.199999, -26.666698, 0.6475, 19.199999, 40, 5.1640997, 19.199999, 26.666698, 4.6417, 19.199999, 40, 2.7977998, 6.3999996, 26.666698, 4.6417, 19.199999, 26.666698, -0.0876, 6.3999996, 40, 2.7977998, 6.3999996, 26.666698, 4.6417, 19.199999, 13.3333, 3.9671, 19.199999, 26.666698, -0.0876, 6.3999996, 13.3333, 3.9671, 19.199999, 13.3333, 0.49469998, 6.3999996, 26.666698, -0.0876, 6.3999996, 13.3333, 3.9671, 19.199999, 0, 3.3063, 19.199999, 13.3333, 0.49469998, 6.3999996, 0, 3.3063, 19.199999, 0, 1.4552, 6.3999996, 13.3333, 0.49469998, 6.3999996, 0, 3.3063, 19.199999, -13.3333, 1.1552, 19.199999, 0, 1.4552, 6.3999996, -13.3333, 1.1552, 19.199999, -13.3333, 1.3698, 6.3999996, 0, 1.4552, 6.3999996, -13.3333, 1.1552, 19.199999, -26.666698, 0.6475, 19.199999, -13.3333, 1.3698, 6.3999996, -26.666698, 0.6475, 19.199999, -26.666698, 1.0284, 6.3999996, -13.3333, 1.3698, 6.3999996, -26.666698, 0.6475, 19.199999, -40, 1.5926, 19.199999, -26.666698, 1.0284, 6.3999996, -40, 1.5926, 19.199999, -40, 4.1405997, 6.3999996, -26.666698, 1.0284, 6.3999996, 40, 2.7977998, 6.3999996, 26.666698, -0.0876, 6.3999996, 40, -2.1815999, -6.3999996, 26.666698, -0.0876, 6.3999996, 26.666698, -6.6166, -6.3999996, 40, -2.1815999, -6.3999996, 26.666698, -0.0876, 6.3999996, 13.3333, 0.49469998, 6.3999996, 26.666698, -6.6166, -6.3999996, 13.3333, 0.49469998, 6.3999996, 13.3333, -4.1454, -6.3999996, 26.666698, -6.6166, -6.3999996, 13.3333, 0.49469998, 6.3999996, 0, 1.4552, 6.3999996, 13.3333, -4.1454, -6.3999996, 0, 1.4552, 6.3999996, 0, -3.783, -6.3999996, 13.3333, -4.1454, -6.3999996, 0, 1.4552, 6.3999996, -13.3333, 1.3698, 6.3999996, 0, -3.783, -6.3999996, -13.3333, 1.3698, 6.3999996, -13.3333, -3.7275, -6.3999996, 0, -3.783, -6.3999996, -13.3333, 1.3698, 6.3999996, -26.666698, 1.0284, 6.3999996, -13.3333, -3.7275, -6.3999996, -26.666698, 1.0284, 6.3999996, -26.666698, -2.1501, -6.3999996, -13.3333, -3.7275, -6.3999996, -26.666698, 1.0284, 6.3999996, -40, 4.1405997, 6.3999996, -26.666698, -2.1501, -6.3999996, -40, 4.1405997, 6.3999996, -40, -2.2285, -6.3999996, -26.666698, -2.1501, -6.3999996, 40, -2.1815999, -6.3999996, 26.666698, -6.6166, -6.3999996, 40, -4.6570997, -19.199999, 26.666698, -6.6166, -6.3999996, 26.666698, -4.0518, -19.199999, 40, -4.6570997, -19.199999, 26.666698, -6.6166, -6.3999996, 13.3333, -4.1454, -6.3999996, 26.666698, -4.0518, -19.199999, 13.3333, -4.1454, -6.3999996, 13.3333, -5.1457996, -19.199999, 26.666698, -4.0518, -19.199999, 13.3333, -4.1454, -6.3999996, 0, -3.783, -6.3999996, 13.3333, -5.1457996, -19.199999, 0, -3.783, -6.3999996, 0, -8.4973, -19.199999, 13.3333, -5.1457996, -19.199999, 0, -3.783, -6.3999996, -13.3333, -3.7275, -6.3999996, 0, -8.4973, -19.199999, -13.3333, -3.7275, -6.3999996, -13.3333, -4.2651, -19.199999, 0, -8.4973, -19.199999, -13.3333, -3.7275, -6.3999996, -26.666698, -2.1501, -6.3999996, -13.3333, -4.2651, -19.199999, -26.666698, -2.1501, -6.3999996, -26.666698, -6.3566, -19.199999, -13.3333, -4.2651, -19.199999, -26.666698, -2.1501, -6.3999996, -40, -2.2285, -6.3999996, -26.666698, -6.3566, -19.199999, -40, -2.2285, -6.3999996, -40, -5.9286, -19.199999, -26.666698, -6.3566, -19.199999, 40, -4.6570997, -19.199999, 26.666698, -4.0518, -19.199999, 40, -3.1945, -32, 26.666698, -4.0518, -19.199999, 26.666698, -0.7438, -32, 40, -3.1945, -32, 26.666698, -4.0518, -19.199999, 13.3333, -5.1457996, -19.199999, 26.666698, -0.7438, -32, 13.3333, -5.1457996, -19.199999, 13.3333, -1.8725, -32, 26.666698, -0.7438, -32, 13.3333, -5.1457996, -19.199999, 0, -8.4973, -19.199999, 13.3333, -1.8725, -32, 0, -8.4973, -19.199999, 0, -9.170899, -32, 13.3333, -1.8725, -32, 0, -8.4973, -19.199999, -13.3333, -4.2651, -19.199999, 0, -9.170899, -32, -13.3333, -4.2651, -19.199999, -13.3333, -5.2394, -32, 0, -9.170899, -32, -13.3333, -4.2651, -19.199999, -26.666698, -6.3566, -19.199999, -13.3333, -5.2394, -32, -26.666698, -6.3566, -19.199999, -26.666698, -6.8494, -32, -13.3333, -5.2394, -32, -26.666698, -6.3566, -19.199999, -40, -5.9286, -19.199999, -26.666698, -6.8494, -32, -40, -5.9286, -19.199999, -40, -5.6577997, -32, -26.666698, -6.8494, -32)
+
+[sub_resource type="Resource" id="Resource_p3s2m"]
+script = ExtResource("6_04k72")
+amount = 50
+restrict_height = true
+reference_frame = 1
+
+[sub_resource type="Resource" id="Resource_kvc48"]
+script = ExtResource("7_7fw6j")
+position = Vector3(0.15, 0.15, 0.15)
+rotation = Vector3(5, 360, 5)
+scale = Vector3(0.1, 0.1, 0.1)
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_ifaa2"]
+script = ExtResource("8_j5upa")
+offset_step = 0.2
+consecutive_step_multiplier = 0.75
+restrict_height = true
+
+[sub_resource type="Resource" id="Resource_04k72"]
+script = ExtResource("9_q35sh")
+ray_length = 32.0
+ray_offset = 5.0
+collision_mask = 4
+
+[sub_resource type="Resource" id="Resource_7fw6j"]
+script = ExtResource("10_sj7oi")
+scale = Vector3(3, 3, 3)
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_j5upa"]
+script = ExtResource("4_kvc48")
+stack = Array[ExtResource("5_ifaa2")]([SubResource("Resource_p3s2m"), SubResource("Resource_kvc48"), SubResource("Resource_ifaa2"), SubResource("Resource_04k72"), SubResource("Resource_7fw6j")])
+
+[sub_resource type="Resource" id="Resource_u43bj"]
+script = ExtResource("13_gmq17")
+size = Vector3(80, 32, 64)
+metadata/_custom_type_script = "uid://bmfbe715km8ok"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8uw0o"]
+shader = ExtResource("15_vytbh")
+shader_parameter/sky_visible = true
+shader_parameter/color_correction = Vector2(0, 1)
+shader_parameter/ground_color = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/horizon_offset = 0.0
+shader_parameter/atm_darkness = 0.5
+shader_parameter/atm_sun_intensity = 18.0
+shader_parameter/atm_day_tint = Color(0.807843, 0.909804, 1, 1)
+shader_parameter/atm_horizon_light_tint = Color(0.980392, 0.635294, 0.462745, 1)
+shader_parameter/atm_night_tint = Color(0.098639965, 0.1169919, 0.14681312, 0.5849595)
+shader_parameter/atm_level_params = Vector3(1, 0, 0)
+shader_parameter/atm_thickness = 0.7
+shader_parameter/atm_beta_ray = Vector3(5.804544e-06, 1.3562913e-05, 3.311258e-05)
+shader_parameter/atm_beta_mie = Vector3(3.038e-08, 3.038e-08, 3.038e-08)
+shader_parameter/sun_light_color = Color(0.98, 0.523, 0.294, 1)
+shader_parameter/sun_disk_color = Color(0.996094, 0.541334, 0.140076, 1)
+shader_parameter/sun_disk_intensity = 30.0
+shader_parameter/sun_disk_size = 0.02
+shader_parameter/atm_sun_mie_tint = Color(1, 1, 1, 1)
+shader_parameter/atm_sun_mie_intensity = 1.0
+shader_parameter/atm_sun_partial_mie_phase = Vector3(0.36, 1.64, 1.6)
+shader_parameter/moon_color = Color(1, 1, 1, 1)
+shader_parameter/moon_texture = ExtResource("18_bcfm5")
+shader_parameter/moon_texture_alignment = Vector3(7, 1.4, 4.8)
+shader_parameter/moon_texture_flip_u = false
+shader_parameter/moon_texture_flip_v = false
+shader_parameter/moon_size = 0.07
+shader_parameter/atm_moon_mie_tint = Color(0.137255, 0.184314, 0.292196, 1)
+shader_parameter/atm_moon_mie_intensity = 0.4094716465473175
+shader_parameter/atm_moon_partial_mie_phase = Vector3(0.36, 1.64, 1.6)
+shader_parameter/starmap_color = Color(0.709804, 0.709804, 0.709804, 0.854902)
+shader_parameter/starmap_texture = ExtResource("21_i4m1h")
+shader_parameter/starmap_flip_u = false
+shader_parameter/starmap_flip_v = false
+shader_parameter/starmap_alignment = Vector3(2.68288, -0.25891, 0.40101)
+shader_parameter/star_rotation_offset = 9.38899
+shader_parameter/star_rotation = -13.086479861815507
+shader_parameter/star_tilt = -1.2915436464758039
+shader_parameter/star_field_color = Color(1, 1, 1, 1)
+shader_parameter/star_field_texture = ExtResource("20_scoa5")
+shader_parameter/star_scintillation = 0.75
+shader_parameter/star_scintillation_speed = 0.01
+shader_parameter/noise_tex = ExtResource("19_bbi4x")
+shader_parameter/clouds_night_color = Color(0.090196, 0.094118, 0.129412, 1)
+shader_parameter/cirrus_visible = true
+shader_parameter/cirrus_intensity = 2.0
+shader_parameter/cirrus_coverage = 0.5
+shader_parameter/cirrus_thickness = 1.7
+shader_parameter/cirrus_absorption = 2.0
+shader_parameter/cirrus_sky_tint_fade = 0.5
+shader_parameter/cirrus_size = 1.0
+shader_parameter/cirrus_uv = Vector2(0.16, 0.11)
+shader_parameter/cirrus_position1 = Vector2(0.003818371, 0.003818371)
+shader_parameter/cirrus_position2 = Vector2(0.003818371, 0.003818371)
+shader_parameter/cirrus_texture = ExtResource("16_0lrtt")
+shader_parameter/cumulus_visible = true
+shader_parameter/cumulus_intensity = 0.6
+shader_parameter/cumulus_coverage = 0.55
+shader_parameter/cumulus_thickness = 0.0243
+shader_parameter/cumulus_absorption = 2.0
+shader_parameter/cumulus_noise_freq = 2.7
+shader_parameter/cumulus_sky_tint_fade = 0.0
+shader_parameter/cumulus_size = 0.5
+shader_parameter/cumulus_position = Vector2(0.019091906, 0.019091906)
+shader_parameter/cumulus_texture = ExtResource("17_ig7e0")
+shader_parameter/cumulus_partial_mie_phase = Vector3(0.957564, 1.042436, 0.412)
+shader_parameter/cumulus_mie_intensity = 1.0
+shader_parameter/show_azimuthal_grid = false
+shader_parameter/azimuthal_grid_color = Color(0.87058824, 0.72156864, 0.5294118, 1)
+shader_parameter/azimuthal_grid_rotation_offset = 0.03
+shader_parameter/show_equatorial_grid = false
+shader_parameter/equatorial_grid_color = Color(0, 0.75, 1, 1)
+shader_parameter/equatorial_grid_rotation_offset = 0.03
+shader_parameter/moon_matrix = Basis(0, 0.15919192, -0.9872476, -0.9545783, -0.2941604, -0.04743284, -0.2979601, 0.94240516, 0.15196116)
+
+[sub_resource type="Sky" id="Sky_ql5ya"]
+sky_material = SubResource("ShaderMaterial_8uw0o")
+
+[sub_resource type="Environment" id="Environment_ka3nr"]
+background_mode = 2
+sky = SubResource("Sky_ql5ya")
+ambient_light_source = 3
+ambient_light_color = Color(0.35, 0.28642783, 0.2865088, 1)
+ambient_light_sky_contribution = 0.7
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_white = 6.0
+fog_mode = 1
+fog_light_color = Color(0.10524041, 0.10524041, 0.1052404, 1)
+fog_density = 1.0
+fog_aerial_perspective = 0.441
+fog_depth_curve = 0.2102241
+fog_depth_begin = 30.0
+fog_depth_end = 50.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_qywvv"]
+
+[node name="Background" type="Node3D" unique_id=655625705]
+
+[node name="Camera" type="Node3D" parent="." unique_id=543911587]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Camera" unique_id=845987952]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Camera/SubViewportContainer" unique_id=1255202009]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Camera/SubViewportContainer/SubViewport" unique_id=1108630054]
+transform = Transform3D(1, 0, 0, 0, 0.9660342, -0.25841442, 0, 0.25841442, 0.9660342, 2.0423508, -5.5206814, -7.290971)
+fov = 45.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera/SubViewportContainer/SubViewport/Camera3D" unique_id=1277536050]
+light_energy = 4.158
+spot_range = 4096.0
+spot_angle = 50.0
+
+[node name="Environment" type="Node3D" parent="." unique_id=2139143375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.529958, -6.443846)
+
+[node name="Terrain" type="StaticBody3D" parent="Environment" unique_id=1884446992]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 8, -32)
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("1_2h8dh")
+width = 80.0
+length = 64.0
+noise = SubResource("FastNoiseLite_flqon")
+
+[node name="TerrainMesh" type="MeshInstance3D" parent="Environment/Terrain" unique_id=1955141195]
+mesh = SubResource("ArrayMesh_2h8dh")
+surface_material_override/0 = SubResource("StandardMaterial3D_vr8o3")
+
+[node name="TerrainCollision" type="CollisionShape3D" parent="Environment/Terrain" unique_id=1560616066]
+shape = SubResource("ConcavePolygonShape3D_sqmh0")
+
+[node name="Props" type="Node3D" parent="Environment" unique_id=813842922]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+
+[node name="Trees" type="Node3D" parent="Environment/Props" unique_id=183022491]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.454466, -8)
+script = ExtResource("3_p3s2m")
+modifier_stack = SubResource("Resource_j5upa")
+Performance/use_chunks = true
+Performance/chunk_dimensions = Vector3(15, 15, 15)
+metadata/_custom_type_script = "uid://wrqel3132hbv"
+
+[node name="ScatterItem" type="Node3D" parent="Environment/Props/Trees" unique_id=271840919]
+script = ExtResource("11_yr67h")
+path = "uid://1qgn8bnadfn8"
+
+[node name="ScatterShape" type="Node3D" parent="Environment/Props/Trees" unique_id=313127983]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 8.348396, -24)
+script = ExtResource("12_x17fb")
+shape = SubResource("Resource_u43bj")
+
+[node name="Ghost" parent="Environment/Props" unique_id=482712621 instance=ExtResource("14_j5a3n")]
+transform = Transform3D(-0.42989665, 0, 0.9028781, 0, 1, 0, -0.9028781, 0, -0.42989665, 6.0321293, -5.105974, -9.217987)
+prop = true
+prop_eyes = 1
+
+[node name="Ghost2" parent="Environment/Props" unique_id=997308693 instance=ExtResource("14_j5a3n")]
+transform = Transform3D(-0.82209456, 0, -0.5693513, 0, 1, 0, 0.5693513, 0, -0.82209456, -12.320126, -2.3025532, -23.410929)
+prop = true
+prop_eyes = 1
+
+[node name="Ghost3" parent="Environment/Props" unique_id=1006544357 instance=ExtResource("14_j5a3n")]
+transform = Transform3D(-0.95347524, 0, 0.30147135, 0, 1, 0, -0.30147135, 0, -0.95347524, 6.6576166, -3.5958757, -22.714258)
+prop = true
+prop_eyes = 1
+
+[node name="Sky3D" type="WorldEnvironment" parent="Environment" unique_id=853845514]
+environment = SubResource("Environment_ka3nr")
+camera_attributes = SubResource("CameraAttributesPractical_qywvv")
+script = ExtResource("22_4j4oy")
+editor_time_enabled = false
+game_time_enabled = false
+current_time = 18.68
+wind_direction = 2.35619451204804
+metadata/_custom_type_script = "uid://deo0gxkmk2ahd"
+
+[node name="SunLight" type="DirectionalLight3D" parent="Environment/Sky3D" unique_id=706662885]
+transform = Transform3D(0.32817653, -0.26917747, -0.90545225, 0, 0.9585396, -0.28495955, 0.94461644, 0.093517035, 0.3145702, -0.9054522, -0.28495952, 0.31457016)
+light_color = Color(0.98, 0.523, 0.294, 1)
+light_energy = 0.0
+
+[node name="MoonLight" type="DirectionalLight3D" parent="Environment/Sky3D" unique_id=809028145]
+transform = Transform3D(0, -0.9545783, -0.2979601, 0.15919192, -0.2941604, 0.9424052, -0.98724765, -0.04743284, 0.15196116, -0.2979601, 0.9424052, 0.15196116)
+light_color = Color(0.572549, 0.776471, 0.956863, 1)
+light_energy = 0.03708942
+shadow_enabled = true
+
+[node name="SkyDome" type="Node" parent="Environment/Sky3D" unique_id=1016561098]
+script = ExtResource("23_bhojl")
+sun_azimuth = -4.3780165
+sun_altitude = -1.8597605
+moon_azimuth = -4.2407694
+moon_altitude = -0.34104633
+fog_density = 0.38731143
+fog_start = 10.0
+fog_end = 25.0
+fog_falloff = 0.75
+fog_rayleigh_depth = 0.02255676
+wind_direction = 2.35619451204804
+
+[node name="TimeOfDay" type="Node" parent="Environment/Sky3D" unique_id=401132453]
+script = ExtResource("24_65ar6")
+editor_time_enabled = false
+game_time_enabled = false
+dome_path = NodePath("../SkyDome")
+current_time = 18.68
+day = 6

@@ -9,14 +9,12 @@ extends StaticBody3D
 	set(new_bool):
 		update_mesh()
 
-@export_range(16.0, 256.0, 2.0) var width := 64.0
-@export_range(16.0, 1024.0, 16.0) var length := 256.0
-
-@export_range(4, 256, 4) var resolution := 32
+@export var width: float = 64.0
+@export var length: float = 256.0
 
 @export var noise: FastNoiseLite
 
-@export_range(4.0, 128.0, 4.0) var height := 16.0
+@export var height:float = 16.0
 
 func get_height(x: float, y: float) -> float:
 	if noise:
@@ -33,8 +31,10 @@ func update_mesh() -> void:
 	print("Generating Mesh")
 	# Create initial plane
 	var plane := PlaneMesh.new()
-	plane.subdivide_depth = resolution
-	plane.subdivide_width = resolution
+	@warning_ignore("narrowing_conversion")
+	plane.subdivide_depth = length / 16
+	@warning_ignore("narrowing_conversion")
+	plane.subdivide_width = width / 16
 	plane.size = Vector2(width, length)
 	
 	# Create surface tool and get plane vertices

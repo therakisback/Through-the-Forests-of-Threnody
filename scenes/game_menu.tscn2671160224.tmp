@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://cb5ned4rsirv4"]
+
+[ext_resource type="Theme" uid="uid://b8o7wg26qv1yt" path="res://themes/job_board.tres" id="1_qdaa4"]
+[ext_resource type="Script" uid="uid://c80rmbdmhie2x" path="res://scripts/jobs_board.gd" id="2_mw6r2"]
+[ext_resource type="Script" uid="uid://duu4hb3tkp3s7" path="res://scripts/main_menu_button.gd" id="2_vrsc2"]
+[ext_resource type="Script" uid="uid://ywxpl7agdu50" path="res://scripts/shop_button.gd" id="2_ysvk1"]
+
+[node name="Game Menu" type="CanvasLayer" unique_id=882220174]
+
+[node name="Menu" type="Control" parent="." unique_id=1016669956]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_qdaa4")
+
+[node name="ColorRect" type="ColorRect" parent="Menu" unique_id=1992905102]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5294118, 0.3882353, 0.22745098, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu" unique_id=1252527718]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer" unique_id=2105185760]
+layout_mode = 2
+
+[node name="Jobs Title" type="Label" parent="Menu/MarginContainer/VBoxContainer" unique_id=1479663196]
+custom_minimum_size = Vector2(1244.695, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 130
+text = "Urgent Deliveries"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/MarginContainer/VBoxContainer" unique_id=197392377]
+layout_mode = 2
+
+[node name="MissionChoices" type="VBoxContainer" parent="Menu/MarginContainer/VBoxContainer/MarginContainer" unique_id=192613694]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+script = ExtResource("2_mw6r2")
+
+[node name="MissionDescription" type="RichTextLabel" parent="Menu/MarginContainer/VBoxContainer/MarginContainer" unique_id=759962012]
+custom_minimum_size = Vector2(1100, 650)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/normal_font_size = 40
+text = "Yap Yap Yap Yap. 
+oh there is cephandrius - fuckin get im"
+
+[node name="StartButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/MarginContainer/MissionDescription" unique_id=1723874315]
+custom_minimum_size = Vector2(750, 150)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -8.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 70
+text = "Start Mission"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Menu" unique_id=1484479188]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -177.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 40
+
+[node name="Shop" type="Button" parent="Menu/MarginContainer2" unique_id=1784886841]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 100
+text = "Shop "
+flat = true
+script = ExtResource("2_ysvk1")
+
+[node name="Main Menu" type="Button" parent="Menu/MarginContainer2" unique_id=2033312691]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 100
+text = "Menu"
+flat = true
+script = ExtResource("2_vrsc2")
+
+[connection signal="pressed" from="Menu/MarginContainer2/Main Menu" to="Menu/MarginContainer2/Main Menu" method="_on_pressed"]

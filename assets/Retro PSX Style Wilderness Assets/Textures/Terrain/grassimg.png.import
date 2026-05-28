@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bo2g1gwi31fj2"
 path.s3tc="res://.godot/imported/grassimg.png-ac294441d9e551272fd09df0db9ad398.s3tc.ctex"
+path.etc2="res://.godot/imported/grassimg.png-ac294441d9e551272fd09df0db9ad398.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/Retro PSX Style Wilderness Assets/Textures/Terrain/grassimg.png"
-dest_files=["res://.godot/imported/grassimg.png-ac294441d9e551272fd09df0db9ad398.s3tc.ctex"]
+dest_files=["res://.godot/imported/grassimg.png-ac294441d9e551272fd09df0db9ad398.s3tc.ctex", "res://.godot/imported/grassimg.png-ac294441d9e551272fd09df0db9ad398.etc2.ctex"]
 
 [params]
 

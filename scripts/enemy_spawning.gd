@@ -13,22 +13,24 @@ var enemies : int = 0
 @export var ray_length: float = 16
 @export var spawn_transform: Vector3
 var size : Vector2 = mesh.size
+signal finished_spawning
 
-
-func _ready() -> void:
-	print("Spawning shadows")
+func spawn_shadows():
+	print("Spawning shadows: ", mesh.size)
 	while get_child_count() < max_enemies:
 		var ray_pos = cast_ray()
 		if (ray_pos.length() > 0):
 			spawn_enemy(ray_pos)
 		else:
 			print("Enemy Spawn RayCast detected no collider!")
-		
+	print("Finished spawning shadows")
+	finished_spawning.emit()
+
 func cast_ray() -> Vector3:
 	# Establish variables for a raycast to find the terrain
 	var space_state := get_world_3d().direct_space_state
-	var ray_x := (randf() - 0.5) * size.x
-	var ray_y := (randf() - 0.5) * size.y
+	var ray_x: float = (randf() - 0.5) * mesh.size.x
+	var ray_y: float = (randf() - 0.5) * mesh.size.y
 	var start := Vector3(ray_x, ray_length, ray_y)
 	var end := Vector3(ray_x, -ray_length, ray_y)
 	# This selects only the "terrain" layer & mask for collision

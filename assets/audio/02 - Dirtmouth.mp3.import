@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bxowchhf48d1p"
+path="res://.godot/imported/02 - Dirtmouth.mp3-c30ba9b668422264c77200f37f36354c.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/02 - Dirtmouth.mp3"
+dest_files=["res://.godot/imported/02 - Dirtmouth.mp3-c30ba9b668422264c77200f37f36354c.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

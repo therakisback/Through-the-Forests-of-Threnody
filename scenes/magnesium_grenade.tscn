@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bslfy2wfmr5p3"]
+
+[ext_resource type="Script" uid="uid://bxmvux5cdwmf3" path="res://scripts/magnesium_grenade.gd" id="1_he33d"]
+[ext_resource type="Material" uid="uid://dmw20ihb31w1q" path="res://assets/burning_magnesium.tres" id="2_jqar1"]
+[ext_resource type="Material" uid="uid://c0x4ghh35e7p" path="res://assets/metal.tres" id="3_tvpka"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_hodn7"]
+material = ExtResource("2_jqar1")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sjfui"]
+material = ExtResource("3_tvpka")
+top_radius = 0.55
+height = 0.25
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_eqfqf"]
+material = ExtResource("3_tvpka")
+bottom_radius = 0.55
+height = 0.25
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dvovr"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0xovn"]
+points = PackedVector3Array(0.21836363, 0.12326957, 0.50401175, -0.100555494, 0.10621972, -0.5366112, -0.16642731, 0.08880778, -0.51618886, 0.4724777, -0.125, -0.114013456, -0.43991065, -0.125, 0.21179761, -0.52283, 0.123748496, 0.16864228, 0.5228363, 0.12372447, -0.16861024, -0.29320568, -0.125, -0.39093244, 0.2933078, -0.125, 0.39093244, 0.18364617, -0.11130267, -0.4675522, -0.18364617, -0.11130267, 0.4675522, -0.50399655, 0.12324108, -0.21837679, 0.50399655, 0.12324108, 0.21837679, -0.2849178, 0.1229502, 0.46924013, 0.33468646, 0.12278864, -0.4351855, -0.48422736, -0.11129047, -0.13348167, 0.48420376, -0.11128519, 0.13357976, 0.39111108, -0.125, -0.29325035, 0.050268665, -0.09505969, 0.5034294, -0.10120481, 0.123827375, 0.54007626, -0.38879657, 0.12401666, -0.38872045, -0.11403578, -0.125, -0.47248727, 0.10120481, 0.123827375, -0.54007626, -0.38162273, -0.09399924, 0.33176282, 0.4047883, 0.12371856, 0.37100974, -0.5034356, -0.09504276, 0.050249603, 0.5370763, 0.07274364, 0.050258905, -0.41566828, -0.11082126, -0.28257826, -0.5400793, 0.12382808, -0.10118557, 0.41566828, -0.11082126, 0.28257826, 0.0502686, -0.09505958, -0.50342876, -0.43516004, 0.12278697, 0.33472136)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_k25s5"]
+points = PackedVector3Array(-0.09770121, -0.125, 0.52137935, -0.09770121, -0.125, -0.52137935, -0.100768685, -0.11198169, -0.5377489, 0.5021397, 0.08927427, 0.06689691, -0.485892, 0.12291448, 0.11725045, 0.52137935, -0.125, -0.09768207, 0.11726935, 0.122910134, -0.48588502, 0.21685286, 0.122397505, 0.45045134, -0.52137935, -0.125, -0.09768207, -0.3186426, 0.12303848, -0.3857216, 0.43334004, -0.111072004, 0.33324113, 0.33326003, -0.11109088, -0.4333307, 0.43316427, 0.122180976, -0.24982946, -0.3186416, 0.12303809, 0.3857204, -0.4672838, -0.11121913, 0.28361887, -0.46727124, -0.11121622, -0.28361127, 0.21173698, -0.125, 0.48871657, -0.48588917, 0.122913755, -0.11724977, -0.066922165, 0.08929101, 0.5021326, 0.43316352, 0.12218076, 0.24982901, -0.28369373, -0.11122652, 0.46722415, 0.537746, -0.111981116, 0.10074842, -0.11727003, 0.122910865, -0.48588783, -0.28370133, -0.111229435, -0.46723667, 0.10076759, -0.11198051, -0.53774303, -0.53775185, -0.1119823, 0.100749515, 0.100768685, -0.11198169, 0.5377489, 0.51730585, -0.094519064, -0.16672216, 0.24982175, 0.12220487, -0.43316227, 0.485892, 0.12291448, -0.11725045, 0.42367816, -0.125, -0.3258111, -0.11726935, 0.122910134, 0.48588502)
+
+[node name="Magnesium Grenade" type="RigidBody3D" unique_id=755856185]
+collision_layer = 8
+collision_mask = 12
+script = ExtResource("1_he33d")
+
+[node name="Magnesium Ball" type="MeshInstance3D" parent="." unique_id=690893663]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("SphereMesh_hodn7")
+
+[node name="Metal Ring" type="MeshInstance3D" parent="Magnesium Ball" unique_id=1280520284]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+mesh = SubResource("CylinderMesh_sjfui")
+
+[node name="Metal Ring2" type="MeshInstance3D" parent="Magnesium Ball" unique_id=715636552]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
+mesh = SubResource("CylinderMesh_eqfqf")
+
+[node name="Ball Collider" type="CollisionShape3D" parent="." unique_id=169485079]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("SphereShape3D_dvovr")
+
+[node name="Top Ring Collider" type="CollisionShape3D" parent="." unique_id=1720044163]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.025, 0)
+shape = SubResource("ConvexPolygonShape3D_0xovn")
+
+[node name="Bottom Ring Collider" type="CollisionShape3D" parent="." unique_id=610157599]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.025, 0)
+shape = SubResource("ConvexPolygonShape3D_k25s5")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1081169758]
+light_energy = 16.0
+omni_range = 10.0
+omni_attenuation = 2.0

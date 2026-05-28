@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bfqjdxusxtwoq"
 path.s3tc="res://.godot/imported/poplar_barkimg.png-301b2f3b46d1ef08d656cd893dc429fc.s3tc.ctex"
+path.etc2="res://.godot/imported/poplar_barkimg.png-301b2f3b46d1ef08d656cd893dc429fc.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/Retro PSX Style Wilderness Assets/Textures/Trees/poplar_barkimg.png"
-dest_files=["res://.godot/imported/poplar_barkimg.png-301b2f3b46d1ef08d656cd893dc429fc.s3tc.ctex"]
+dest_files=["res://.godot/imported/poplar_barkimg.png-301b2f3b46d1ef08d656cd893dc429fc.s3tc.ctex", "res://.godot/imported/poplar_barkimg.png-301b2f3b46d1ef08d656cd893dc429fc.etc2.ctex"]
 
 [params]
 
