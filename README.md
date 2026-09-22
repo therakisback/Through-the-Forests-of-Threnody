@@ -2,7 +2,7 @@
 ### A small game demo inspired by the Brandon Sanderson Novella 'Shadows for Silence in the Forests of Hell'
 
 ## Overview
-This project was created as a project for University College Dublin's Game Development class. 
+This project was created in under a month as a project for University College Dublin's Game Development class. 
 With the requirement of making a "corridor game", and inspired by the popular mobile game "Into the Dead". 
 Through the Forests of Threnody is a game about being a courier in a world that has three Simple Rules:
  * Do not kindle a flame
